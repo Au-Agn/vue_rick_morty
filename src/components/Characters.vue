@@ -1,7 +1,7 @@
 <template>
   <div class="utils">
     <Filter />
-    <Searcher :characters="CHARACTERS" @showSearchValue="showSearchValue" />
+    <Searcher />
   </div>
   <List :characters="this.availableCharacters" />
 </template>
@@ -21,10 +21,10 @@ export default {
   },
   components: { Searcher, Filter, List },
   computed: {
-    ...mapGetters(["CHARACTERS"]),
+    ...mapGetters(["CHARACTERS", "FILTERED_CHARACTERS"]),
     availableCharacters() {
-      if (this.filteredCards.length) {
-        return this.filteredCards;
+      if (this.FILTERED_CHARACTERS.length) {
+        return this.FILTERED_CHARACTERS;
       } else {
         return this.CHARACTERS;
       }

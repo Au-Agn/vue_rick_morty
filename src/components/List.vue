@@ -6,7 +6,7 @@
       :key="item.id"
     />
   </div>
-  <p v-else>No characters</p>
+  <p v-else>no cards</p>
 </template>
 
 <script>

@@ -7,7 +7,10 @@ export default createStore({
   state: {
     characters: [],
     characterItem: null,
-    favourites: []
+    filteredCharacters: [],
+    favourites: [],
+    urlParams: {}
+    // isSelected: false
   },
   mutations,
   actions,

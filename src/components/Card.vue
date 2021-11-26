@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div  v-if="CHARACTER_ITEM" class="card">
     <div class="card__info">
       <h3>{{ CHARACTER_ITEM.name }}</h3>
       <span>{{ CHARACTER_ITEM.species }}</span> -

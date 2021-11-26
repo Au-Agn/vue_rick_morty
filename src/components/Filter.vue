@@ -1,15 +1,32 @@
 <template>
-  <div class="filter">
-    <a class="filter-btn filter-btn__active">All</a>
-    <a class="filter-btn">Human</a>
-    <a class="filter-btn">Animal</a>
-    <a class="filter-btn">Alien</a>
+  <div
+    @click="filter(item)"
+    class="filter"
+    v-for="item in options"
+    :key="item.id"
+  >
+    <a class="filter-btn">{{ item }}</a>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "Filter",
+  data() {
+    return {
+      options: ["All", "Human", "Animal", "Alien"],
+    };
+  },
+  methods: {
+    ...mapActions(["FILTER_CHARACTER", "GET_URL_PARAMS"]),
+    filter(option) {
+      const params = `species=${option}`;
+      this.GET_URL_PARAMS({species: params});
+      this.FILTER_CHARACTER(option);
+    },
+  },
 };
 </script>
 

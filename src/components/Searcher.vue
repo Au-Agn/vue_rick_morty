@@ -1,45 +1,49 @@
 <template>
   <div class="search-field">
-    <input
+    <input 
       type="text"
       v-model="searchValue"
-      @keypress.enter="search(searchValue)"
+      @keypress.enter="search(params)"
     />
-    <button @click="search(searchValue)" class="search_btn">search</button>
+    <button
+      @click="search(params)"
+      class="search_btn"
+    >
+    search
+    </button>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "Searcher",
   data() {
     return {
       searchValue: "",
-      filteredCards: [],
     };
   },
-  props: {
-    characters: {
-      // type: Array,
-      default: [],
+  computed: {
+    params() {
+      return `name=${this.searchValue}`;
     },
   },
   methods: {
+    ...mapActions(["GET_URL_PARAMS", "FILTER_CHARACTER"]),
     search(value) {
-      if (value) {
-        this.filteredCards = this.characters.filter((item) => {
-          return item.name.toLowerCase().includes(value.toLowerCase());
-        });
-        this.$emit("showSearchValue", this.filteredCards);
-      } else {
-        return this.$emit("showSearchValue", []);
-      }
+      this.GET_URL_PARAMS({
+        name: this.searchValue.length
+          ? value
+          : null 
+      });
+      this.FILTER_CHARACTER();
     },
   },
   watch: {
     searchValue(value) {
       if (!value.length) {
-        return this.$emit("showSearchValue", []);
+        this.search(null);
       }
     },
   },

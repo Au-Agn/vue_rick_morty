@@ -1,5 +1,8 @@
 export default {
   CHARACTERS: (state) => state.characters,
   CHARACTER_ITEM: (state) => state.characterItem,
-  FAVOURITES: (state) => state.favourites
+  FILTERED_CHARACTERS: (state) => state.filteredCharacters,
+  FAVOURITES: (state) => state.favourites,
+  IS_SELECTED: (state) => state.isSelected,
+  URL_PARAMS: (state) => state.urlParams
 };
