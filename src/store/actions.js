@@ -28,13 +28,10 @@ export default {
   GET_URL_PARAMS({ commit }, params) {
     commit("SET_URL_PARAMS", params);
   },
-  ADD_CHARACTER_TO_FAVOURITES({ commit }, character) {
-    commit("SET_CHARACTER_TO_FAVOURITES", character);
+  ADD_TO_FAVOURITES({ commit }, character) {
+    commit("SET_TO_FAVOURITES", character);
   },
-  REMOVE_CHARACTER_FROM_FAVOURITES({ commit }, id) {
-    commit("DELETE_CHARACTER_FROM_FAVOURITES", id);
-  },
-  CHANGE_CARD_STATUS({ commit }, card) {
-    commit("CHANGE_CARD_STATUS", card);
+  REMOVE_FROM_FAVOURITES({ commit }, id) {
+    commit("DELETE_FROM_FAVOURITES", id);
   },
 };

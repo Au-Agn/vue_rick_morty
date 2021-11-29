@@ -9,8 +9,8 @@ export default createStore({
     characterItem: null,
     filteredCharacters: [],
     favourites: [],
-    urlParams: {}
-    // isSelected: false
+    urlParams: {},
+    isExists: false,
   },
   mutations,
   actions,

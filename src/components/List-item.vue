@@ -4,11 +4,17 @@
       <img class="list-item__image" :src="card.image" />
     </router-link>
     <div class="list-item__info">
-      <h4>{{ card.name }}</h4>
-      <span>{{ card.species }}</span> - <span>{{ card.status }}</span>
-      <button @click="addToFavourites(card)">
-        {{ this.isSelected ? "Remove to Favourites" : "Add to Favourites" }}
-      </button>
+      <div>
+        <span>{{ card.name }}</span>
+      </div>
+      <div>
+        <span>{{ card.species }}</span> - <span>{{ card.status }}</span>
+      </div>
+      <div>
+        <button @click="handleButton(card)">
+          {{ this.isAdded ? "Remove from Favourites" : "Add to Favourites" }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -20,7 +26,7 @@ export default {
   name: "ListItem",
   data() {
     return {
-      isSelected: false,
+      isAdded: false,
     };
   },
   props: {
@@ -33,17 +39,26 @@ export default {
     ...mapGetters(["FAVOURITES"]),
   },
   methods: {
-    ...mapActions(["ADD_CHARACTER_TO_FAVOURITES"]),
-    check(card) {
-      const ids = this.FAVOURITES.map((item) => item.id);
-      return ids.includes(card.id)
-        ? this.isSelected = !this.isSelected 
-        : this.isSelected
+    ...mapActions(["ADD_TO_FAVOURITES", "REMOVE_FROM_FAVOURITES"]),
+    change() {
+      return (this.isAdded = !this.isAdded);
     },
-    addToFavourites(card) {
-      this.check(card);
-      this.ADD_CHARACTER_TO_FAVOURITES(card);
+    handleButton(card) {
+      return this.isAdded ? this.remove(card) : this.add(card);
     },
+    add(card) {
+      this.ADD_TO_FAVOURITES(card);
+      this.change();
+    },
+    remove(card) {
+      this.REMOVE_FROM_FAVOURITES(card.id);
+      this.change();
+    },
+  },
+  mounted() {
+    if (this.$route.path === "/favourites") {
+      this.isAdded = !this.isAdded;
+    }
   },
 };
 </script>

@@ -3,6 +3,6 @@ export default {
   CHARACTER_ITEM: (state) => state.characterItem,
   FILTERED_CHARACTERS: (state) => state.filteredCharacters,
   FAVOURITES: (state) => state.favourites,
-  IS_SELECTED: (state) => state.isSelected,
-  URL_PARAMS: (state) => state.urlParams
+  URL_PARAMS: (state) => state.urlParams,
+  IS_EXISTS_IN_FAVOURITES: (state) => state.isExists,
 };
