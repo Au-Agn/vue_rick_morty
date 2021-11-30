@@ -1,6 +1,7 @@
 export default {
   SET_CHARACTERS: (state, data) => {
-    state.characters = data;
+    state.characters = data.results;
+    state.info = data.info;
   },
   SET_CHARACTER: (state, data) => {
     state.characterItem = data;

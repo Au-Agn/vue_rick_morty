@@ -11,6 +11,7 @@ export default createStore({
     favourites: [],
     urlParams: {},
     isExists: false,
+    info: null
   },
   mutations,
   actions,

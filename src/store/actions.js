@@ -1,8 +1,8 @@
 export default {
-  GET_CHARACTERS({ commit }) {
-    return fetch("https://rickandmortyapi.com/api/character")
+  GET_CHARACTERS({ commit }, url) {
+    return fetch(url)
       .then((res) => res.json())
-      .then((data) => commit("SET_CHARACTERS", data.results))
+      .then((data) => (commit("SET_CHARACTERS", data)))
       .catch((err) => console.log(err.message));
   },
   GET_CHARACTER_BY_ID({ commit }, id) {

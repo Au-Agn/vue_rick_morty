@@ -5,4 +5,5 @@ export default {
   FAVOURITES: (state) => state.favourites,
   URL_PARAMS: (state) => state.urlParams,
   IS_EXISTS_IN_FAVOURITES: (state) => state.isExists,
+  PAGE_INFO: (state) => state.info,
 };

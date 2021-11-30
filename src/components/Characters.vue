@@ -4,10 +4,12 @@
     <Searcher />
   </div>
   <List :characters="this.availableCharacters" />
+  <Pagination />
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import Pagination from "./Pagination.vue";
 import Searcher from "./Searcher.vue";
 import Filter from "./Filter.vue";
 import List from "./List.vue";
@@ -16,10 +18,10 @@ export default {
   name: "Characters",
   data() {
     return {
-      filteredCards: [],
+      url: "https://rickandmortyapi.com/api/character",
     };
   },
-  components: { Searcher, Filter, List },
+  components: { Searcher, Filter, List, Pagination },
   computed: {
     ...mapGetters(["CHARACTERS", "FILTERED_CHARACTERS"]),
     availableCharacters() {
@@ -32,12 +34,9 @@ export default {
   },
   methods: {
     ...mapActions(["GET_CHARACTERS"]),
-    showSearchValue(data) {
-      this.filteredCards = data;
-    },
   },
   mounted() {
-    this.GET_CHARACTERS();
+    this.GET_CHARACTERS(this.url);
   },
 };
 </script>
