@@ -2,14 +2,19 @@ export default {
   GET_CHARACTERS({ commit }, url) {
     return fetch(url)
       .then((res) => res.json())
-      .then((data) => (commit("SET_CHARACTERS", data)))
+      .then((data) => commit("SET_CHARACTERS", data))
       .catch((err) => console.log(err.message));
   },
-  GET_CHARACTER_BY_ID({ commit }, id) {
-    return fetch(`https://rickandmortyapi.com/api/character/${id}`)
-      .then((res) => res.json())
-      .then((res) => commit("SET_CHARACTER", res))
-      .catch((err) => console.log(err.message));
+  GET_CHARACTER_BY_ID({ commit, dispatch }, id) {
+    return (
+      fetch(`https://rickandmortyapi.com/api/character/${id}`)
+        .then((res) => res.json())
+        .then((res) => {
+          commit("SET_CHARACTER", res);
+          dispatch("GET_EPISODE_INFO", res.episode[0]);
+        })
+        .catch((err) => console.log(err.message))
+    );
   },
   FILTER_CHARACTER({ commit, state }, species) {
     if (species === "All") {
@@ -25,7 +30,7 @@ export default {
         .catch((err) => console.log(err.message));
     }
   },
-  GET_URL_PARAMS({ commit }, params) {
+  GET_URL_PARAMS_FOR_FILTER({ commit }, params) {
     commit("SET_URL_PARAMS", params);
   },
   ADD_TO_FAVOURITES({ commit }, character) {
@@ -33,5 +38,11 @@ export default {
   },
   REMOVE_FROM_FAVOURITES({ commit }, id) {
     commit("DELETE_FROM_FAVOURITES", id);
+  },
+  GET_EPISODE_INFO({ commit }, url) {
+    return fetch(url)
+      .then((res) => res.json())
+      .then((data) => commit("SET_EPISODE_INFO", data))
+      .catch((err) => console.log(err.message));
   },
 };

@@ -7,17 +7,17 @@ const routes = [
     component: () => import('../components/Characters.vue')
   },
   {
-    path: '/characters',
+    path: '/Characters',
     name: 'Characters',
     component: () => import('../components/Characters.vue')
   },
   {
-    path: '/favourites',
+    path: '/Favourites',
     name: 'Favourites',
     component: () => import('../components/Favourites.vue')
   },
   {
-    path: "/characters/:id",
+    path: "/Characters/:id",
     name: "Card",
     component: () => import("../components/Card.vue"),
   }

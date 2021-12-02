@@ -1,11 +1,14 @@
 <template>
-  <div
-    @click="filter(item)"
-    class="filter"
-    v-for="item in options"
-    :key="item.id"
-  >
-    <a class="filter-btn">{{ item }}</a>
+  <div class="filter">
+    <a
+      v-for="item in options"
+      :key="item.id"
+      class="filter_btn"
+      :class="{ 'filter_btn-active': item === activeBtn }"
+      @click="filter(item)"
+    >
+      {{ item }}
+    </a>
   </div>
 </template>
 
@@ -17,14 +20,16 @@ export default {
   data() {
     return {
       options: ["All", "Human", "Animal", "Alien"],
+      activeBtn: "All",
     };
   },
   methods: {
-    ...mapActions(["FILTER_CHARACTER", "GET_URL_PARAMS"]),
-    filter(option) {
-      const params = `species=${option}`;
-      this.GET_URL_PARAMS({species: params});
-      this.FILTER_CHARACTER(option);
+    ...mapActions(["FILTER_CHARACTER", "GET_URL_PARAMS_FOR_FILTER"]),
+    filter(item) {
+      this.activeBtn = item;
+      const params = `species=${item}`;
+      this.GET_URL_PARAMS_FOR_FILTER({ species: params });
+      this.FILTER_CHARACTER(item);
     },
   },
 };
@@ -34,8 +39,9 @@ export default {
 .filter {
   display: flex;
   border: 1px solid gray;
+  border-radius: 3px;
 }
-.filter-btn {
+.filter_btn {
   padding: 5px 10px;
   border-right: 1px solid gray;
   cursor: pointer;
@@ -47,7 +53,7 @@ export default {
     background-color: gray;
     color: white;
   }
-  &__active {
+  &-active {
     background-color: gray;
     color: white;
   }

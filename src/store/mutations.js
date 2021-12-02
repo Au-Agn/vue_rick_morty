@@ -1,7 +1,7 @@
 export default {
   SET_CHARACTERS: (state, data) => {
     state.characters = data.results;
-    state.info = data.info;
+    state.pageInfo = data.info;
   },
   SET_CHARACTER: (state, data) => {
     state.characterItem = data;
@@ -32,5 +32,8 @@ export default {
   DELETE_FROM_FAVOURITES: (state, id) => {
     const newData = state.favourites.filter((item) => item.id !== id);
     state.favourites = newData;
+  },
+  SET_EPISODE_INFO: (state, data) => {
+    state.episode = data;
   },
 };

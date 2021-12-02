@@ -10,8 +10,9 @@ export default createStore({
     filteredCharacters: [],
     favourites: [],
     urlParams: {},
-    isExists: false,
-    info: null
+    isExistsInFavourites: false,
+    pageInfo: null,
+    episode: null
   },
   mutations,
   actions,

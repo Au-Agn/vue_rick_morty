@@ -4,6 +4,7 @@ export default {
   FILTERED_CHARACTERS: (state) => state.filteredCharacters,
   FAVOURITES: (state) => state.favourites,
   URL_PARAMS: (state) => state.urlParams,
-  IS_EXISTS_IN_FAVOURITES: (state) => state.isExists,
-  PAGE_INFO: (state) => state.info,
+  IS_EXISTS_IN_FAVOURITES: (state) => state.isExistsInFavourites,
+  PAGE_INFO: (state) => state.pageInfo,
+  EPISODE: (state) => state.episode,
 };

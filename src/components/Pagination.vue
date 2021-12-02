@@ -23,7 +23,7 @@ export default {
   name: "Pagination",
   data() {
     return {
-       pageNumber: 1
+      pageNumber: 1,
     };
   },
   computed: {
@@ -32,7 +32,7 @@ export default {
   methods: {
     ...mapActions(["GET_CHARACTERS"]),
     changePage(url) {
-      this.pageNumber = url.split("=")[1];
+      this.pageNumber = url !== null && url.split("=")[1];
       this.GET_CHARACTERS(url);
     },
   },
@@ -51,8 +51,11 @@ export default {
     padding: 16px;
   }
   &__item {
+    padding: 0;
+    border: none;
     cursor: pointer;
-    padding-left: 10px;
+    background-color: inherit;
+    margin-left: 10px;
 
     &-disable {
       color: gray;

@@ -1,16 +1,7 @@
 <template>
   <div class="search-field">
-    <input 
-      type="text"
-      v-model="searchValue"
-      @keypress.enter="search(params)"
-    />
-    <button
-      @click="search(params)"
-      class="search_btn"
-    >
-    search
-    </button>
+    <input type="text" v-model="searchValue" @keypress.enter="search(params)" />
+    <button @click="search(params)" class="search_btn">search</button>
   </div>
 </template>
 
@@ -30,12 +21,10 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["GET_URL_PARAMS", "FILTER_CHARACTER"]),
+    ...mapActions(["GET_URL_PARAMS_FOR_FILTER", "FILTER_CHARACTER"]),
     search(value) {
-      this.GET_URL_PARAMS({
-        name: this.searchValue.length
-          ? value
-          : null 
+      this.GET_URL_PARAMS_FOR_FILTER({
+        name: this.searchValue.length ? value : null,
       });
       this.FILTER_CHARACTER();
     },
@@ -60,5 +49,14 @@ export default {
 .search_btn {
   background: transparent;
   border: 0;
+  cursor: pointer;
+  margin-left: 5px;
+  padding: 3px;
+
+  &:hover {
+    background-color: gray;
+    color: white;
+    border-radius: 3px;
+  }
 }
 </style>

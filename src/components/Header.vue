@@ -1,14 +1,21 @@
 <template>
   <div class="header">
     <div class="menu">
-      <router-link :to="'/characters'">
-        <a href="#">Characters</a>
-      </router-link>
-      <router-link :to="'/favourites'">
-        <a class="menu__item" href="#">Favourites</a>
+      <router-link
+        :to="`/${item}`"
+        v-for="item in navbar"
+        :key="item"
+        class="menu_item"
+      >
+        <a 
+          href="#"
+          :class="{ 'is-active': this.$route.path === `/${item}` }"
+        >
+        {{ item }}
+        </a>
       </router-link>
     </div>
-    <div class="cart">{{FAVOURITES.length}}</div>
+    <div class="cart">{{ FAVOURITES.length }}</div>
   </div>
 </template>
 
@@ -17,9 +24,14 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "Header",
+  data() {
+    return {
+      navbar: ["Characters", "Favourites"],
+    };
+  },
   computed: {
-    ...mapGetters(["FAVOURITES"])
-  }
+    ...mapGetters(["FAVOURITES"]),
+  },
 };
 </script>
 
@@ -43,11 +55,19 @@ a {
   // width: 100%;
   // top: 0;
 }
-.menu__item {
-  margin-left: 30px;
+.menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.menu_item {
+  margin-left: 10px;
   // display: flex;
   // justify-content: flex-end;
   // align-items: center;
+}
+.is-active {
+  color: black;
 }
 .cart {
   display: flex;

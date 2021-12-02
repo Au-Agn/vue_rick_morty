@@ -1,6 +1,6 @@
 <template>
   <div class="list-item">
-    <router-link :to="'/characters/' + card.id">
+    <router-link :to="'/Characters/' + card.id">
       <img class="list-item__image" :src="card.image" />
     </router-link>
     <div class="list-item__info">

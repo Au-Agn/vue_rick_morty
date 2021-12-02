@@ -1,11 +1,11 @@
 <template>
-  <div  v-if="CHARACTER_ITEM" class="card">
+  <div  v-if="CHARACTER_ITEM !== null" class="card">
     <div class="card__info">
       <h3>{{ CHARACTER_ITEM.name }}</h3>
       <span>{{ CHARACTER_ITEM.species }}</span> -
       <span>{{ CHARACTER_ITEM.status }}</span>
       <p>Last known location: {{ CHARACTER_ITEM.location.name }}</p>
-      <p>First seen in: {{ CHARACTER_ITEM.location.name }}</p>
+      <p>First seen in: {{ EPISODE.name }}</p>
       <button>Add to Favourites</button>
     </div>
     <img class="card__image" :src="CHARACTER_ITEM.image" />
@@ -18,7 +18,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Card",
   computed: {
-    ...mapGetters(["CHARACTER_ITEM"]),
+    ...mapGetters(["CHARACTER_ITEM", "EPISODE"]),
   },
   methods: {
     ...mapActions(["GET_CHARACTER_BY_ID"]),
