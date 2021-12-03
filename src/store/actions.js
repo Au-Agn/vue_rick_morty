@@ -6,29 +6,23 @@ export default {
       .catch((err) => console.log(err.message));
   },
   GET_CHARACTER_BY_ID({ commit, dispatch }, id) {
-    return (
-      fetch(`https://rickandmortyapi.com/api/character/${id}`)
-        .then((res) => res.json())
-        .then((res) => {
-          commit("SET_CHARACTER", res);
-          dispatch("GET_EPISODE_INFO", res.episode[0]);
-        })
-        .catch((err) => console.log(err.message))
-    );
+    return fetch(`https://rickandmortyapi.com/api/character/${id}`)
+      .then((res) => res.json())
+      .then((res) => {
+        commit("SET_CHARACTER", res);
+        dispatch("GET_EPISODE_INFO", res.episode[0]);
+      })
+      .catch((err) => console.log(err.message));
   },
-  FILTER_CHARACTER({ commit, state }, species) {
-    if (species === "All") {
-      state.filteredCharacters = [];
-    } else {
-      const filteredValue = Object.values(state.urlParams).filter(
-        (value) => value != null
-      );
-      const params = `?${filteredValue.join("&")}`;
-      return fetch(`https://rickandmortyapi.com/api/character/${params}`)
-        .then((res) => res.json())
-        .then((res) => commit("SET_FILTERED_CHARACTERS", res.results))
-        .catch((err) => console.log(err.message));
-    }
+  FILTER_CHARACTER({ commit, state }) {
+    const filteredValue = Object.values(state.urlParams).filter(
+      (value) => value != null
+    );
+    const params = `?${filteredValue.join("&")}`;
+    return fetch(`https://rickandmortyapi.com/api/character/${params}`)
+      .then((res) => res.json())
+      .then((res) => commit("SET_FILTERED_CHARACTERS", res.results))
+      .catch((err) => console.log(err.message));
   },
   GET_URL_PARAMS_FOR_FILTER({ commit }, params) {
     commit("SET_URL_PARAMS", params);

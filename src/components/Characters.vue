@@ -3,7 +3,7 @@
     <Filter />
     <Searcher />
   </div>
-  <List :characters="this.availableCharacters" />
+  <List :characters="characters" />
   <Pagination />
 </template>
 
@@ -24,8 +24,8 @@ export default {
   components: { Searcher, Filter, List, Pagination },
   computed: {
     ...mapGetters(["CHARACTERS", "FILTERED_CHARACTERS"]),
-    availableCharacters() {
-      if (this.FILTERED_CHARACTERS.length) {
+    characters() {
+      if (this.FILTERED_CHARACTERS && this.FILTERED_CHARACTERS.length) {
         return this.FILTERED_CHARACTERS;
       } else {
         return this.CHARACTERS;

@@ -27,9 +27,9 @@ export default {
     ...mapActions(["FILTER_CHARACTER", "GET_URL_PARAMS_FOR_FILTER"]),
     filter(item) {
       this.activeBtn = item;
-      const params = `species=${item}`;
+      const params = item !== "All" ? `species=${item}` : null;
       this.GET_URL_PARAMS_FOR_FILTER({ species: params });
-      this.FILTER_CHARACTER(item);
+      this.FILTER_CHARACTER();
     },
   },
 };
