@@ -1,5 +1,5 @@
 <template>
-  <List :characters="FAVOURITES" />
+  <List :characters="favourites" />
 </template>
 
 <script>
@@ -8,13 +8,23 @@ import List from "./List.vue";
 
 export default {
   name: "Favourites",
+  data() {
+    return {
+      favourites: [],
+    };
+  },
   components: { List },
   computed: {
     ...mapGetters(["FAVOURITES"]),
   },
-  update() {
-    console.log(this.FAVOURITES);
-  }
+  mounted() {
+    if (localStorage.getItem("favourites")) {
+      this.favourites = JSON.parse(localStorage.getItem("favourites"));
+
+    } else {
+      this.favourites = this.FAVOURITES;
+    }
+  },
 };
 </script>
 

@@ -12,7 +12,8 @@ export default createStore({
     urlParams: {},
     isExistsInFavourites: false,
     pageInfo: null,
-    episode: null
+    episode: null,
+    isAdded: {},
   },
   mutations,
   actions,

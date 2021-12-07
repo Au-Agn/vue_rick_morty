@@ -12,7 +12,9 @@
       </div>
       <div>
         <button @click="handleButton(card)">
-          {{ this.isAdded ? "Remove from Favourites" : "Add to Favourites" }}
+          {{
+            IS_ADDED[card.id] ? "Remove from Favourites" : "Add to Favourites"
+          }}
         </button>
       </div>
     </div>
@@ -24,11 +26,6 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "ListItem",
-  data() {
-    return {
-      isAdded: false,
-    };
-  },
   props: {
     card: {
       type: Object,
@@ -36,29 +33,13 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["FAVOURITES"]),
+    ...mapGetters(["FAVOURITES", "IS_ADDED"]),
   },
   methods: {
     ...mapActions(["ADD_TO_FAVOURITES", "REMOVE_FROM_FAVOURITES"]),
-    change() {
-      return (this.isAdded = !this.isAdded);
-    },
     handleButton(card) {
-      return this.isAdded ? this.remove(card) : this.add(card);
+      return this.IS_ADDED[card.id] ? this.REMOVE_FROM_FAVOURITES(card.id) : this.ADD_TO_FAVOURITES(card);
     },
-    add(card) {
-      this.ADD_TO_FAVOURITES(card);
-      this.change();
-    },
-    remove(card) {
-      this.REMOVE_FROM_FAVOURITES(card.id);
-      this.change();
-    },
-  },
-  mounted() {
-    if (this.$route.path === "/favourites") {
-      this.isAdded = !this.isAdded;
-    }
   },
 };
 </script>
