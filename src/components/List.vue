@@ -1,9 +1,10 @@
 <template>
   <div class="list" v-if="characters.length">
-    <ListItem 
-      v-for="item in characters" 
-      :card="item" 
+    <ListItem
+      v-for="item in characters"
+      :card="item"
       :key="item.id"
+      :isAdded="isAdded"
     />
   </div>
   <p v-else>no cards</p>
@@ -19,7 +20,13 @@ export default {
     characters: {
       type: Array,
       default: null,
-    }
+    },
+    isAdded: {
+      type: Object,
+      default() {
+        return {}
+      },
+    },
   },
 };
 </script>

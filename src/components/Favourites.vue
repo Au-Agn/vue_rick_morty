@@ -1,5 +1,5 @@
 <template>
-  <List :characters="FAVOURITES" />
+  <List :characters="favourites" :isAdded="isAdded" />
 </template>
 
 <script>
@@ -10,11 +10,26 @@ export default {
   name: "Favourites",
   components: { List },
   computed: {
-    ...mapGetters(["FAVOURITES"]),
+    ...mapGetters(["FAVOURITES", "IS_ADDED"]),
+    isAdded() {
+      if (localStorage.getItem("isAdded")) {
+        return JSON.parse(localStorage.getItem("isAdded"));
+      } else {
+        return this.IS_ADDED;
+      }
+    },
+    favourites() {
+      if (localStorage.getItem("favourites")) {
+        return JSON.parse(localStorage.getItem("favourites"));
+      } else {
+        return this.FAVOURITES;
+      }
+    },
   },
-  update() {
-    console.log(this.FAVOURITES);
-  }
+  mounted() {
+    localStorage.getItem("isAdded");
+    localStorage.getItem("favourites");
+  },
 };
 </script>
 

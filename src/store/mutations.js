@@ -17,23 +17,31 @@ export default {
 
     if (state.favourites.length) {
       if (ids.includes(data.id)) {
-        state.isExists = true;
+        state.isExistsInFavourites = true;
       } else {
-        state.isExists = false;
+        state.isExistsInFavourites = false;
       }
-
-      if (!state.isExists) {
+      if (!state.isExistsInFavourites) {
         state.favourites.push(data);
+        state.isAdded[data.id] = true;
       }
     } else {
       state.favourites.push(data);
+      state.isAdded[data.id] = true;
     }
   },
   DELETE_FROM_FAVOURITES: (state, id) => {
     const newData = state.favourites.filter((item) => item.id !== id);
     state.favourites = newData;
+    state.isAdded[id] = false;
   },
   SET_EPISODE_INFO: (state, data) => {
     state.episode = data;
+  },
+  SAVE_TO_LS: (state) => {
+    const favourites = JSON.stringify(state.favourites);
+    const isAdded = JSON.stringify(state.isAdded);
+    localStorage.setItem("favourites", favourites);
+    localStorage.setItem("isAdded", isAdded);
   },
 };

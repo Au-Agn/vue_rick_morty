@@ -27,16 +27,21 @@ export default {
   GET_URL_PARAMS_FOR_FILTER({ commit }, params) {
     commit("SET_URL_PARAMS", params);
   },
-  ADD_TO_FAVOURITES({ commit }, character) {
+  ADD_TO_FAVOURITES({ commit, dispatch }, character) {
     commit("SET_TO_FAVOURITES", character);
+    dispatch("SAVE_TO_LS");
   },
-  REMOVE_FROM_FAVOURITES({ commit }, id) {
+  REMOVE_FROM_FAVOURITES({ commit, dispatch }, id) {
     commit("DELETE_FROM_FAVOURITES", id);
+    dispatch("SAVE_TO_LS");
   },
   GET_EPISODE_INFO({ commit }, url) {
     return fetch(url)
       .then((res) => res.json())
       .then((data) => commit("SET_EPISODE_INFO", data))
       .catch((err) => console.log(err.message));
+  },
+  SAVE_TO_LS({ commit }) {
+    commit("SAVE_TO_LS");
   },
 };

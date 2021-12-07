@@ -3,7 +3,7 @@
     <Filter />
     <Searcher />
   </div>
-  <List :characters="characters" />
+  <List :characters="characters" :isAdded="isAdded" />
   <Pagination />
 </template>
 
@@ -23,12 +23,19 @@ export default {
   },
   components: { Searcher, Filter, List, Pagination },
   computed: {
-    ...mapGetters(["CHARACTERS", "FILTERED_CHARACTERS"]),
+    ...mapGetters(["CHARACTERS", "FILTERED_CHARACTERS", "IS_ADDED"]),
     characters() {
       if (this.FILTERED_CHARACTERS && this.FILTERED_CHARACTERS.length) {
         return this.FILTERED_CHARACTERS;
       } else {
         return this.CHARACTERS;
+      }
+    },
+    isAdded() {
+      if (localStorage.getItem("isAdded")) {
+        return JSON.parse(localStorage.getItem("isAdded"));
+      } else {
+        return this.IS_ADDED;
       }
     },
   },
@@ -37,6 +44,12 @@ export default {
   },
   mounted() {
     this.GET_CHARACTERS(this.url);
+    localStorage.getItem("isAdded");
+  },
+  watch: {
+    isAdded(value) {
+      console.log(value);
+    },
   },
 };
 </script>
