@@ -41,7 +41,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["FAVOURITES"]),
+    ...mapGetters(["FAVOURITES", "IS_ADDED"]),
   },
   methods: {
     ...mapActions(["ADD_TO_FAVOURITES", "REMOVE_FROM_FAVOURITES"]),
