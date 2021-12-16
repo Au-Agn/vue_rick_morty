@@ -25,10 +25,12 @@ export default {
   computed: {
     ...mapGetters(["CHARACTERS", "FILTERED_CHARACTERS", "IS_ADDED"]),
     characters() {
-      if (this.FILTERED_CHARACTERS && this.FILTERED_CHARACTERS.length) {
+      if (this.FILTERED_CHARACTERS.length) {
         return this.FILTERED_CHARACTERS;
-      } else {
+      } else if (this.CHARACTERS.length) {
         return this.CHARACTERS;
+      } else {
+        return [];
       }
     },
     isAdded() {
@@ -62,8 +64,5 @@ export default {
   border-bottom: 1px solid grey;
   background: white;
   padding: 16px;
-  // position: fixed;
-  // width: 100%;
-  // top: 50px;
 }
 </style>

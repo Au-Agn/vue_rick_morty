@@ -20,9 +20,13 @@ export default {
     );
     const params = `?${filteredValue.join("&")}`;
     return fetch(`https://rickandmortyapi.com/api/character/${params}`)
-      .then((res) => res.json())
+      .then((res) => res.ok ? res.json() : Promise.reject(res.status))
       .then((res) => commit("SET_FILTERED_CHARACTERS", res.results))
-      .catch((err) => console.log(err.message));
+      .catch((err) => 
+        err === 404 && 
+        commit("SET_FILTERED_CHARACTERS", []), 
+        commit("SET_CHARACTERS", {results: []})
+      );
   },
   GET_URL_PARAMS_FOR_FILTER({ commit }, params) {
     commit("SET_URL_PARAMS", params);
