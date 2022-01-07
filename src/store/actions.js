@@ -1,8 +1,12 @@
 export default {
-  GET_CHARACTERS({ commit }, url) {
-    return fetch(url)
+  GET_CHARACTERS({ commit, dispatch }) {
+    return fetch("https://rickandmortyapi.com/api/character")
       .then((res) => res.json())
-      .then((data) => commit("SET_CHARACTERS", data))
+      .then((data) => {
+        commit("SET_CHARACTERS", data.results),
+        dispatch("GET_PAGE_INFO", data.info)
+      }
+    )
       .catch((err) => console.log(err.message));
   },
   GET_CHARACTER_BY_ID({ commit, dispatch }, id) {
@@ -14,14 +18,19 @@ export default {
       })
       .catch((err) => console.log(err.message));
   },
-  FILTER_CHARACTER({ commit, state }) {
+  FILTER_CHARACTER({ commit, dispatch, state }) {
     const filteredValue = Object.values(state.urlParams).filter(
       (value) => value != null
     );
-    const params = `?${filteredValue.join("&")}`;
-    return fetch(`https://rickandmortyapi.com/api/character/${params}`)
+    const page = state.pageNumber;
+    const params = `&${filteredValue.join("&")}`;
+    return fetch(`https://rickandmortyapi.com/api/character/?page=${page}${params}`)
       .then((res) => res.ok ? res.json() : Promise.reject(res.status))
-      .then((res) => commit("SET_FILTERED_CHARACTERS", res.results))
+      .then((res) => {
+        commit("SET_FILTERED_CHARACTERS", res.results),
+        dispatch("GET_PAGE_INFO", res.info)
+      }
+      )
       .catch((err) => 
         err === 404 && 
         commit("SET_FILTERED_CHARACTERS", []), 
@@ -48,4 +57,10 @@ export default {
   SAVE_TO_LS({ commit }) {
     commit("SAVE_TO_LS");
   },
+  GET_PAGE_INFO({ commit }, data) {
+    commit("SET_PAGE_INFO", data)
+  },
+  GET_PAGE_NUMBER({ commit }, data) {
+    commit("SET_PAGE_NUMBER", data)
+  }
 };

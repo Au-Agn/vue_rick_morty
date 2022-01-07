@@ -16,11 +16,6 @@ import List from "./List.vue";
 
 export default {
   name: "Characters",
-  data() {
-    return {
-      url: "https://rickandmortyapi.com/api/character",
-    };
-  },
   components: { Searcher, Filter, List, Pagination },
   computed: {
     ...mapGetters(["CHARACTERS", "FILTERED_CHARACTERS", "IS_ADDED"]),
@@ -45,7 +40,7 @@ export default {
     ...mapActions(["GET_CHARACTERS"]),
   },
   mounted() {
-    this.GET_CHARACTERS(this.url);
+    this.GET_CHARACTERS();
     localStorage.getItem("isAdded");
   },
   watch: {

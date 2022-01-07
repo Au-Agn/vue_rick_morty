@@ -7,5 +7,6 @@ export default {
   IS_EXISTS_IN_FAVOURITES: (state) => state.isExistsInFavourites,
   PAGE_INFO: (state) => state.pageInfo,
   EPISODE: (state) => state.episode,
-  IS_ADDED: (state) => state.isAdded
+  IS_ADDED: (state) => state.isAdded,
+  PAGE_NUMBER: (state) => state.pageNumber
 }

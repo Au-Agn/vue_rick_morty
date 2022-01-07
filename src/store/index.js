@@ -14,6 +14,7 @@ export default createStore({
     pageInfo: null,
     episode: null,
     isAdded: {},
+    pageNumber: 1
   },
   mutations,
   actions,

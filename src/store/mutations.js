@@ -1,7 +1,9 @@
 export default {
   SET_CHARACTERS: (state, data) => {
-    state.characters = data.results;
-    state.pageInfo = data.info;
+    state.characters = data;
+  },
+  SET_PAGE_INFO: (state, data) => {
+    state.pageInfo = data;
   },
   SET_CHARACTER: (state, data) => {
     state.characterItem = data;
@@ -43,5 +45,8 @@ export default {
     const isAdded = JSON.stringify(state.isAdded);
     localStorage.setItem("favourites", favourites);
     localStorage.setItem("isAdded", isAdded);
+  },
+  SET_PAGE_NUMBER: (state, data) => {
+    state.pageNumber = data;
   },
 };

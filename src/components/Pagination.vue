@@ -30,10 +30,12 @@ export default {
     ...mapGetters(["PAGE_INFO"]),
   },
   methods: {
-    ...mapActions(["GET_CHARACTERS"]),
+    ...mapActions(["FILTER_CHARACTER", "GET_PAGE_NUMBER"]),
     changePage(url) {
-      this.pageNumber = url !== null && url.split("=")[1];
-      this.GET_CHARACTERS(url);
+      const newUrl = new URL(url);
+      this.pageNumber = url !== null && newUrl.searchParams.get("page");
+      this.GET_PAGE_NUMBER(this.pageNumber);
+      this.FILTER_CHARACTER();
     },
   },
 };
