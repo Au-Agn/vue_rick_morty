@@ -1,34 +1,22 @@
 <template>
-  <List :characters="favourites" :isAdded="isAdded" />
+  <List :characters="FAVOURITES" />
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import List from "./List.vue";
 
 export default {
   name: "Favourites",
   components: { List },
   computed: {
-    ...mapGetters(["FAVOURITES", "IS_ADDED"]),
-    isAdded() {
-      if (localStorage.getItem("isAdded")) {
-        return JSON.parse(localStorage.getItem("isAdded"));
-      } else {
-        return this.IS_ADDED;
-      }
-    },
-    favourites() {
-      if (localStorage.getItem("favourites")) {
-        return JSON.parse(localStorage.getItem("favourites"));
-      } else {
-        return this.FAVOURITES;
-      }
-    },
+    ...mapGetters(["FAVOURITES"]),
+  },
+  methods: {
+    ...mapActions(["GET_FAVOURITES__FROM_LS"]),
   },
   mounted() {
-    localStorage.getItem("isAdded");
-    localStorage.getItem("favourites");
+    this.GET_FAVOURITES__FROM_LS();
   },
 };
 </script>

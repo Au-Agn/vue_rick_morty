@@ -12,9 +12,7 @@
       </div>
       <div>
         <button @click="handleButton(card)">
-          {{
-            isAdded[card.id] ? "Remove from Favourites" : "Add to Favourites"
-          }}
+          {{ this.isAdded ? "Remove from Favourites" : "Add to Favourites" }}
         </button>
       </div>
     </div>
@@ -33,20 +31,20 @@ export default {
         return {};
       },
     },
-    isAdded: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
   },
   computed: {
-    ...mapGetters(["FAVOURITES", "IS_ADDED"]),
+    ...mapGetters(["FAVOURITES"]),
+    isAdded() {
+      const favouritesIds = this.FAVOURITES.map(item => item.id);
+      return favouritesIds.some(
+        (item) => item === this.card.id
+      );
+    },
   },
   methods: {
     ...mapActions(["ADD_TO_FAVOURITES", "REMOVE_FROM_FAVOURITES"]),
     handleButton(card) {
-      return this.isAdded[card.id]
+      return this.isAdded
         ? this.REMOVE_FROM_FAVOURITES(card.id)
         : this.ADD_TO_FAVOURITES(card);
     },

@@ -51,9 +51,6 @@ a {
   align-items: center;
   background: grey;
   padding: 16px;
-  // position: fixed;
-  // width: 100%;
-  // top: 0;
 }
 .menu {
   display: flex;
@@ -62,9 +59,6 @@ a {
 }
 .menu_item {
   margin-left: 10px;
-  // display: flex;
-  // justify-content: flex-end;
-  // align-items: center;
 }
 .is-active {
   color: black;
@@ -72,6 +66,5 @@ a {
 .cart {
   display: flex;
   color: white;
-  // justify-content: space-between;
 }
 </style>

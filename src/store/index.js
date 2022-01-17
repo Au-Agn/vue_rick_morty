@@ -13,8 +13,6 @@ export default createStore({
     isExistsInFavourites: false,
     pageInfo: null,
     episode: null,
-    isAdded: {},
-    pageNumber: 1
   },
   mutations,
   actions,

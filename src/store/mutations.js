@@ -16,7 +16,6 @@ export default {
   },
   SET_TO_FAVOURITES: (state, data) => {
     const ids = state.favourites.map((item) => item.id);
-
     if (state.favourites.length) {
       if (ids.includes(data.id)) {
         state.isExistsInFavourites = true;
@@ -25,26 +24,23 @@ export default {
       }
       if (!state.isExistsInFavourites) {
         state.favourites.push(data);
-        state.isAdded[data.id] = true;
+        localStorage.setItem('favourites', JSON.stringify(state.favourites));
       }
     } else {
       state.favourites.push(data);
-      state.isAdded[data.id] = true;
+      localStorage.setItem('favourites', JSON.stringify(state.favourites));
     }
   },
   DELETE_FROM_FAVOURITES: (state, id) => {
     const newData = state.favourites.filter((item) => item.id !== id);
     state.favourites = newData;
-    state.isAdded[id] = false;
+    localStorage.setItem('favourites', JSON.stringify(state.favourites));
+  },
+  UPDATE_FAVOURITES__FROM_LS: (state, data) => {
+    state.favourites = data;
   },
   SET_EPISODE_INFO: (state, data) => {
     state.episode = data;
-  },
-  SAVE_TO_LS: (state) => {
-    const favourites = JSON.stringify(state.favourites);
-    const isAdded = JSON.stringify(state.isAdded);
-    localStorage.setItem("favourites", favourites);
-    localStorage.setItem("isAdded", isAdded);
   },
   SET_PAGE_NUMBER: (state, data) => {
     state.pageNumber = data;

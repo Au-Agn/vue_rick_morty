@@ -4,7 +4,6 @@
       v-for="item in characters"
       :card="item"
       :key="item.id"
-      :isAdded="isAdded"
     />
   </div>
   <p v-else>no cards</p>
@@ -21,12 +20,6 @@ export default {
       type: Array,
       default: null,
     },
-    isAdded: {
-      type: Object,
-      default() {
-        return {}
-      },
-    },
   },
 };
 </script>
@@ -35,7 +28,7 @@ export default {
 .list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin-top: 30px;
 }

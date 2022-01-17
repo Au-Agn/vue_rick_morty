@@ -29,8 +29,7 @@ export default {
       .then((res) => {
         commit("SET_FILTERED_CHARACTERS", res.results),
         dispatch("GET_PAGE_INFO", res.info)
-      }
-      )
+      })
       .catch((err) => 
         err === 404 && 
         commit("SET_FILTERED_CHARACTERS", []), 
@@ -40,13 +39,11 @@ export default {
   GET_URL_PARAMS_FOR_FILTER({ commit }, params) {
     commit("SET_URL_PARAMS", params);
   },
-  ADD_TO_FAVOURITES({ commit, dispatch }, character) {
+  ADD_TO_FAVOURITES({ commit }, character) {
     commit("SET_TO_FAVOURITES", character);
-    dispatch("SAVE_TO_LS");
   },
-  REMOVE_FROM_FAVOURITES({ commit, dispatch }, id) {
+  REMOVE_FROM_FAVOURITES({ commit }, id) {
     commit("DELETE_FROM_FAVOURITES", id);
-    dispatch("SAVE_TO_LS");
   },
   GET_EPISODE_INFO({ commit }, url) {
     return fetch(url)
@@ -54,8 +51,9 @@ export default {
       .then((data) => commit("SET_EPISODE_INFO", data))
       .catch((err) => console.log(err.message));
   },
-  SAVE_TO_LS({ commit }) {
-    commit("SAVE_TO_LS");
+  GET_FAVOURITES__FROM_LS({commit}) {
+    const favourites = JSON.parse(localStorage.getItem('favourites')) || [];
+    commit("UPDATE_FAVOURITES__FROM_LS", favourites)
   },
   GET_PAGE_INFO({ commit }, data) {
     commit("SET_PAGE_INFO", data)
