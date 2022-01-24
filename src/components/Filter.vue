@@ -14,6 +14,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import { FILTER_CHARACTER, GET_URL_PARAMS_FOR_FILTER } from "../store/types";
 
 export default {
   name: "Filter",
@@ -24,12 +25,15 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["FILTER_CHARACTER", "GET_URL_PARAMS_FOR_FILTER"]),
+    ...mapActions({
+      filterCharacter: `${FILTER_CHARACTER}`,
+      getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
+    }),
     filter(item) {
       this.activeBtn = item;
       const params = item !== "All" ? `species=${item}` : null;
-      this.GET_URL_PARAMS_FOR_FILTER({ species: params });
-      this.FILTER_CHARACTER();
+      this.getUrlParamsForFilter({ species: params });
+      this.filterCharacter();
     },
   },
 };

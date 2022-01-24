@@ -3,12 +3,18 @@
     <Filter />
     <Searcher />
   </div>
-  <List :characters="characters" />
+  <List :characters="currentCharacters" />
   <Pagination />
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import {
+  CHARACTERS,
+  FILTERED_CHARACTERS,
+  GET_CHARACTERS,
+  GET_FAVOURITES__FROM_LS,
+} from "../store/types";
 import Pagination from "./Pagination.vue";
 import Searcher from "./Searcher.vue";
 import Filter from "./Filter.vue";
@@ -18,23 +24,29 @@ export default {
   name: "Characters",
   components: { Searcher, Filter, List, Pagination },
   computed: {
-    ...mapGetters(["CHARACTERS", "FILTERED_CHARACTERS"]),
-    characters() {
-      if (this.FILTERED_CHARACTERS.length) {
-        return this.FILTERED_CHARACTERS;
-      } else if (this.CHARACTERS.length) {
-        return this.CHARACTERS;
+    ...mapGetters({
+      characters: `${CHARACTERS}`,
+      filteredCharacters: `${FILTERED_CHARACTERS}`,
+    }),
+    currentCharacters() {
+      if (this.filteredCharacters.length) {
+        return this.filteredCharacters;
+      } else if (this.characters.length) {
+        return this.characters;
       } else {
         return [];
       }
     },
   },
   methods: {
-    ...mapActions(["GET_CHARACTERS", "GET_FAVOURITES__FROM_LS"]),
+    ...mapActions({
+      getCharacters: `${GET_CHARACTERS}`,
+      getFavouritesFromLs: `${GET_FAVOURITES__FROM_LS}`,
+    }),
   },
   mounted() {
-    this.GET_CHARACTERS();
-    this.GET_FAVOURITES__FROM_LS();
+    this.getCharacters();
+    this.getFavouritesFromLs();
   },
 };
 </script>

@@ -1,0 +1,61 @@
+// actions
+const GET_CHARACTERS = "getCharacters";
+const GET_CHARACTER_BY_ID = "getCharacterById";
+const FILTER_CHARACTER = "filterCharacter";
+const GET_URL_PARAMS_FOR_FILTER = "getUrlParams";
+const ADD_TO_FAVOURITES = "addToFavourites";
+const REMOVE_FROM_FAVOURITES = "removeFromFavourites";
+const GET_EPISODE_INFO = "getEpisodeInfo";
+const GET_FAVOURITES__FROM_LS = "getFavouritesFromLs";
+const GET_PAGE_INFO = "getPageInfo";
+const GET_PAGE_NUMBER = "getPageNumber";
+// getters
+const CHARACTERS = "characters";
+const CHARACTER_ITEM = "characterItem";
+const FILTERED_CHARACTERS = "filteredCharacters";
+const FAVOURITES = "favourites";
+const PAGE_INFO = "pageInfo";
+const EPISODE = "episode";
+// mutations
+const SET_CHARACTERS = "setCharacters";
+const SET_PAGE_INFO = "setPageInfo";
+const SET_CHARACTER = "setCharacter";
+const SET_FILTERED_CHARACTERS = "setFilteredCharacters";
+const SET_URL_PARAMS = "setUrlParams";
+const SET_TO_FAVOURITES = "setToFavourites";
+const DELETE_FROM_FAVOURITES = "deleteFromFavourites";
+const UPDATE_FAVOURITES__FROM_LS = "updateFavouritesFromLs";
+const SET_EPISODE_INFO = "setEpisodeInfo";
+const SET_PAGE_NUMBER = "setPageNumber";
+
+export {
+  // actions
+  GET_CHARACTERS,
+  GET_CHARACTER_BY_ID,
+  FILTER_CHARACTER,
+  GET_URL_PARAMS_FOR_FILTER,
+  ADD_TO_FAVOURITES,
+  REMOVE_FROM_FAVOURITES,
+  GET_EPISODE_INFO,
+  GET_FAVOURITES__FROM_LS,
+  GET_PAGE_INFO,
+  GET_PAGE_NUMBER,
+  // getters
+  CHARACTERS,
+  CHARACTER_ITEM,
+  FILTERED_CHARACTERS,
+  FAVOURITES,
+  PAGE_INFO,
+  EPISODE,
+  // mutations
+  SET_CHARACTERS,
+  SET_PAGE_INFO,
+  SET_CHARACTER,
+  SET_FILTERED_CHARACTERS,
+  SET_URL_PARAMS,
+  SET_TO_FAVOURITES,
+  DELETE_FROM_FAVOURITES,
+  UPDATE_FAVOURITES__FROM_LS,
+  SET_EPISODE_INFO,
+  SET_PAGE_NUMBER,
+};

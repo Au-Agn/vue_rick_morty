@@ -7,20 +7,18 @@
         :key="item"
         class="menu_item"
       >
-        <a 
-          href="#"
-          :class="{ 'is-active': this.$route.path === `/${item}` }"
-        >
-        {{ item }}
+        <a href="#" :class="{ 'is-active': this.$route.path === `/${item}` }">
+          {{ item }}
         </a>
       </router-link>
     </div>
-    <div class="cart">{{ FAVOURITES.length }}</div>
+    <div class="cart">{{ favourites.length }}</div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import { FAVOURITES } from "../store/types";
 
 export default {
   name: "Header",
@@ -30,7 +28,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["FAVOURITES"]),
+    ...mapGetters({ favourites: `${FAVOURITES}` }),
   },
 };
 </script>

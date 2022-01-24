@@ -1,22 +1,27 @@
 <template>
-  <List :characters="FAVOURITES" />
+  <List :characters="favourites" />
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { FAVOURITES, GET_FAVOURITES__FROM_LS } from "../store/types";
 import List from "./List.vue";
 
 export default {
   name: "Favourites",
   components: { List },
   computed: {
-    ...mapGetters(["FAVOURITES"]),
+    ...mapGetters({
+      favourites: `${FAVOURITES}`,
+    }),
   },
   methods: {
-    ...mapActions(["GET_FAVOURITES__FROM_LS"]),
+    ...mapActions({
+      getFavouritesFromLs: `${GET_FAVOURITES__FROM_LS}`,
+    }),
   },
   mounted() {
-    this.GET_FAVOURITES__FROM_LS();
+    this.getFavouritesFromLs();
   },
 };
 </script>

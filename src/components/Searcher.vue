@@ -7,6 +7,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import { GET_URL_PARAMS_FOR_FILTER, FILTER_CHARACTER } from "../store/types";
 
 export default {
   name: "Searcher",
@@ -21,12 +22,15 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["GET_URL_PARAMS_FOR_FILTER", "FILTER_CHARACTER"]),
+    ...mapActions({
+      getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
+      filterCharacter: `${FILTER_CHARACTER}`,
+    }),
     search(value) {
-      this.GET_URL_PARAMS_FOR_FILTER({
+      this.getUrlParamsForFilter({
         name: this.searchValue.length ? value : null,
       });
-      this.FILTER_CHARACTER();
+      this.filterCharacter();
     },
   },
   watch: {

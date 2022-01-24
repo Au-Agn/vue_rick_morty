@@ -21,6 +21,11 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import {
+  FAVOURITES,
+  ADD_TO_FAVOURITES,
+  REMOVE_FROM_FAVOURITES,
+} from "../store/types";
 
 export default {
   name: "ListItem",
@@ -33,20 +38,21 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["FAVOURITES"]),
+    ...mapGetters({ favourites: `${FAVOURITES}` }),
     isAdded() {
-      const favouritesIds = this.FAVOURITES.map(item => item.id);
-      return favouritesIds.some(
-        (item) => item === this.card.id
-      );
+      const favouritesIds = this.favourites.map((item) => item.id);
+      return favouritesIds.some((item) => item === this.card.id);
     },
   },
   methods: {
-    ...mapActions(["ADD_TO_FAVOURITES", "REMOVE_FROM_FAVOURITES"]),
+    ...mapActions({
+      addToFavourites: `${ADD_TO_FAVOURITES}`,
+      removeFromFavourites: `${REMOVE_FROM_FAVOURITES}`,
+    }),
     handleButton(card) {
       return this.isAdded
-        ? this.REMOVE_FROM_FAVOURITES(card.id)
-        : this.ADD_TO_FAVOURITES(card);
+        ? this.removeFromFavourites(card.id)
+        : this.addToFavourites(card);
     },
   },
 };

@@ -1,31 +1,37 @@
 <template>
-  <div  v-if="CHARACTER_ITEM !== null" class="card">
+  <div v-if="characterItem !== null" class="card">
     <div class="card__info">
-      <h3>{{ CHARACTER_ITEM.name }}</h3>
-      <span>{{ CHARACTER_ITEM.species }}</span> -
-      <span>{{ CHARACTER_ITEM.status }}</span>
-      <p>Last known location: {{ CHARACTER_ITEM.location.name }}</p>
-      <p>First seen in: {{ EPISODE.name }}</p>
+      <h3>{{ characterItem.name }}</h3>
+      <span>{{ characterItem.species }}</span> -
+      <span>{{ characterItem.status }}</span>
+      <p>Last known location: {{ characterItem.location.name }}</p>
+      <p>First seen in: {{ episode.name }}</p>
       <button>Add to Favourites</button>
     </div>
-    <img class="card__image" :src="CHARACTER_ITEM.image" />
+    <img class="card__image" :src="characterItem.image" />
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { CHARACTER_ITEM, EPISODE, GET_CHARACTER_BY_ID } from "../store/types";
 
 export default {
   name: "Card",
   computed: {
-    ...mapGetters(["CHARACTER_ITEM", "EPISODE"]),
+    ...mapGetters({
+      characterItem: `${CHARACTER_ITEM}`,
+      episode: `${EPISODE}`,
+    }),
   },
   methods: {
-    ...mapActions(["GET_CHARACTER_BY_ID"]),
+    ...mapActions({
+      getCharacterById: `${GET_CHARACTER_BY_ID}`,
+    }),
   },
   mounted() {
     const id = +this.$route.params.id;
-    this.GET_CHARACTER_BY_ID(id);
+    this.getCharacterById(id);
   },
 };
 </script>

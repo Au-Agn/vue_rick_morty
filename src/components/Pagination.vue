@@ -1,15 +1,15 @@
 <template>
-  <div class="pagitation__wrap" v-if="PAGE_INFO">
-    <div>Page {{ pageNumber }} of {{ PAGE_INFO.pages }}</div>
+  <div class="pagitation__wrap" v-if="pageInfo">
+    <div>Page {{ pageNumber }} of {{ pageInfo.pages }}</div>
     <div class="pagitation">
       <button
-        @click="changePage(PAGE_INFO.prev)"
+        @click="changePage(pageInfo.prev)"
         class="pagitation__item"
-        :disabled="PAGE_INFO.prev === null"
+        :disabled="pageInfo.prev === null"
       >
         Prev
       </button>
-      <button @click="changePage(PAGE_INFO.next)" class="pagitation__item">
+      <button @click="changePage(pageInfo.next)" class="pagitation__item">
         Next
       </button>
     </div>
@@ -18,6 +18,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { PAGE_INFO, FILTER_CHARACTER, GET_PAGE_NUMBER } from "../store/types";
 
 export default {
   name: "Pagination",
@@ -27,15 +28,18 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["PAGE_INFO"]),
+    ...mapGetters({ pageInfo: `${PAGE_INFO}` }),
   },
   methods: {
-    ...mapActions(["FILTER_CHARACTER", "GET_PAGE_NUMBER"]),
+    ...mapActions({
+      filterCharacter: `${FILTER_CHARACTER}`,
+      getPageNumber: `${GET_PAGE_NUMBER}`,
+    }),
     changePage(url) {
       const newUrl = new URL(url);
       this.pageNumber = url !== null && newUrl.searchParams.get("page");
-      this.GET_PAGE_NUMBER(this.pageNumber);
-      this.FILTER_CHARACTER();
+      this.getPageNumber(this.pageNumber);
+      this.filterCharacter();
     },
   },
 };
