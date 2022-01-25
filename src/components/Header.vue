@@ -12,16 +12,23 @@
         </a>
       </router-link>
     </div>
-    <div class="cart">{{ favourites.length }}</div>
+    <div class="cart">
+      <div class="cart__icon">
+        <FavouriteIcon />
+      </div>
+      <div class="cart__count">{{ favourites.length }}</div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import { FAVOURITES } from "../store/types";
+import FavouriteIcon from "../assets/icons/FavouriteIcon";
 
 export default {
   name: "Header",
+  components: { FavouriteIcon },
   data() {
     return {
       navbar: ["Characters", "Favourites"],
@@ -63,6 +70,14 @@ a {
 }
 .cart {
   display: flex;
-  color: white;
+  align-items: center;
+
+  &__count {
+    padding-left: 5px;
+  }
+  &__icon {
+    height: 25px;
+    width: 25px;
+  }
 }
 </style>

@@ -5,7 +5,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { FAVOURITES, GET_FAVOURITES__FROM_LS } from "../store/types";
-import List from "./List.vue";
+import List from "../components/List.vue";
 
 export default {
   name: "Favourites",

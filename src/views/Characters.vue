@@ -15,10 +15,10 @@ import {
   GET_CHARACTERS,
   GET_FAVOURITES__FROM_LS,
 } from "../store/types";
-import Pagination from "./Pagination.vue";
-import Searcher from "./Searcher.vue";
-import Filter from "./Filter.vue";
-import List from "./List.vue";
+import Pagination from "../components/Pagination.vue";
+import Searcher from "../components/Searcher.vue";
+import Filter from "../components/Filter.vue";
+import List from "../components/List.vue";
 
 export default {
   name: "Characters",
