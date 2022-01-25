@@ -1,16 +1,18 @@
 <template>
-  <div v-if="characterItem !== null" class="card">
-    <div class="card__info">
-      <h3>{{ characterItem.name }}</h3>
-      <span>{{ characterItem.species }}</span> -
-      <span>{{ characterItem.status }}</span>
-      <p>Last known location: {{ characterItem.location.name }}</p>
-      <p>First seen in: {{ episode.name }}</p>
-      <button @click="handleButton(characterItem)">
-        {{ this.isAdded ? "Remove from Favourites" : "Add to Favourites" }}
-      </button>
+  <div class="container">
+    <div v-if="characterItem !== null" class="card">
+      <div class="card__info">
+        <h3>{{ characterItem.name }}</h3>
+        <span>{{ characterItem.species }}</span> -
+        <span>{{ characterItem.status }}</span>
+        <p>Last known location: {{ characterItem.location.name }}</p>
+        <p>First seen in: {{ episode.name }}</p>
+        <button @click="handleButton(characterItem)">
+          {{ this.isAdded ? "Remove from Favourites" : "Add to Favourites" }}
+        </button>
+      </div>
+      <img class="card__image" :src="characterItem.image" />
     </div>
-    <img class="card__image" :src="characterItem.image" />
   </div>
 </template>
 
@@ -34,7 +36,7 @@ export default {
       episode: `${EPISODE}`,
       favourites: `${FAVOURITES}`,
     }),
-     isAdded() {
+    isAdded() {
       const favouritesIds = this.favourites.map((item) => item.id);
       return favouritesIds.some((item) => item === this.characterItem.id);
     },
@@ -61,6 +63,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
 .card {
   display: flex;
   justify-content: space-between;

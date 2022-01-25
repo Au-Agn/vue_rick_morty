@@ -1,12 +1,14 @@
 <template>
-  <div class="list" v-if="characters.length">
-    <ListItem
-      v-for="item in characters"
-      :card="item"
-      :key="item.id"
-    />
+  <div class="container">
+    <div class="list" v-if="characters.length">
+      <ListItem 
+        v-for="item in characters" 
+        :card="item" 
+        :key="item.id"
+      />
+    </div>
+    <p v-else>no cards</p>
   </div>
-  <p v-else>no cards</p>
 </template>
 
 <script>
@@ -25,11 +27,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
 .list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-gap: 20px;
   margin-top: 30px;
 }
 </style>

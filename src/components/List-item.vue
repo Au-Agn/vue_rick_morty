@@ -60,17 +60,15 @@ export default {
 
 <style scoped lang="scss">
 .list-item {
-  flex-basis: 20%;
+  border: 1px solid #e0e0e0;
   box-shadow: 0 0 8px 0 #e0e0e0;
-  padding-bottom: 10px;
-  margin: 10px;
 
   &__image {
     width: 100%;
   }
 
   &__info {
-    padding-top: 10px;
+    padding: 10px 0;
     text-align: center;
   }
 }
