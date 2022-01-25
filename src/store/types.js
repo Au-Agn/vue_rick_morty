@@ -6,7 +6,7 @@ const GET_URL_PARAMS_FOR_FILTER = "getUrlParams";
 const ADD_TO_FAVOURITES = "addToFavourites";
 const REMOVE_FROM_FAVOURITES = "removeFromFavourites";
 const GET_EPISODE_INFO = "getEpisodeInfo";
-const GET_FAVOURITES__FROM_LS = "getFavouritesFromLs";
+const GET_FAVOURITES_FROM_LS = "getFavouritesFromLs";
 const GET_PAGE_INFO = "getPageInfo";
 const GET_PAGE_NUMBER = "getPageNumber";
 // getters
@@ -37,7 +37,7 @@ export {
   ADD_TO_FAVOURITES,
   REMOVE_FROM_FAVOURITES,
   GET_EPISODE_INFO,
-  GET_FAVOURITES__FROM_LS,
+  GET_FAVOURITES_FROM_LS,
   GET_PAGE_INFO,
   GET_PAGE_NUMBER,
   // getters

@@ -6,7 +6,9 @@
       <span>{{ characterItem.status }}</span>
       <p>Last known location: {{ characterItem.location.name }}</p>
       <p>First seen in: {{ episode.name }}</p>
-      <button>Add to Favourites</button>
+      <button @click="handleButton(characterItem)">
+        {{ this.isAdded ? "Remove from Favourites" : "Add to Favourites" }}
+      </button>
     </div>
     <img class="card__image" :src="characterItem.image" />
   </div>
@@ -14,7 +16,15 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { CHARACTER_ITEM, EPISODE, GET_CHARACTER_BY_ID } from "../store/types";
+import {
+  CHARACTER_ITEM,
+  EPISODE,
+  GET_CHARACTER_BY_ID,
+  FAVOURITES,
+  ADD_TO_FAVOURITES,
+  REMOVE_FROM_FAVOURITES,
+  GET_FAVOURITES_FROM_LS,
+} from "../store/types";
 
 export default {
   name: "Card",
@@ -22,16 +32,30 @@ export default {
     ...mapGetters({
       characterItem: `${CHARACTER_ITEM}`,
       episode: `${EPISODE}`,
+      favourites: `${FAVOURITES}`,
     }),
+     isAdded() {
+      const favouritesIds = this.favourites.map((item) => item.id);
+      return favouritesIds.some((item) => item === this.characterItem.id);
+    },
   },
   methods: {
     ...mapActions({
       getCharacterById: `${GET_CHARACTER_BY_ID}`,
+      getFavouritesFromLs: `${GET_FAVOURITES_FROM_LS}`,
+      addToFavourites: `${ADD_TO_FAVOURITES}`,
+      removeFromFavourites: `${REMOVE_FROM_FAVOURITES}`,
     }),
+    handleButton(card) {
+      return this.isAdded
+        ? this.removeFromFavourites(card.id)
+        : this.addToFavourites(card);
+    },
   },
   mounted() {
     const id = +this.$route.params.id;
     this.getCharacterById(id);
+    this.getFavouritesFromLs();
   },
 };
 </script>

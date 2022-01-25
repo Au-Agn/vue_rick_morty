@@ -6,7 +6,7 @@ import {
   ADD_TO_FAVOURITES,
   REMOVE_FROM_FAVOURITES,
   GET_EPISODE_INFO,
-  GET_FAVOURITES__FROM_LS,
+  GET_FAVOURITES_FROM_LS,
   GET_PAGE_INFO,
   GET_PAGE_NUMBER,
   SET_CHARACTERS,
@@ -74,7 +74,7 @@ export default {
       .then((data) => commit(SET_EPISODE_INFO, data))
       .catch((err) => console.log(err.message));
   },
-  [GET_FAVOURITES__FROM_LS]({ commit }) {
+  [GET_FAVOURITES_FROM_LS]({ commit }) {
     const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
     commit(UPDATE_FAVOURITES__FROM_LS, favourites);
   },

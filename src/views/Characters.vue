@@ -13,7 +13,7 @@ import {
   CHARACTERS,
   FILTERED_CHARACTERS,
   GET_CHARACTERS,
-  GET_FAVOURITES__FROM_LS,
+  GET_FAVOURITES_FROM_LS,
 } from "../store/types";
 import Pagination from "../components/Pagination.vue";
 import Searcher from "../components/Searcher.vue";
@@ -41,7 +41,7 @@ export default {
   methods: {
     ...mapActions({
       getCharacters: `${GET_CHARACTERS}`,
-      getFavouritesFromLs: `${GET_FAVOURITES__FROM_LS}`,
+      getFavouritesFromLs: `${GET_FAVOURITES_FROM_LS}`,
     }),
   },
   mounted() {
