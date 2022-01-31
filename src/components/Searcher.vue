@@ -1,7 +1,7 @@
 <template>
   <div class="search-field">
-    <input type="text" v-model="searchValue" @keypress.enter="search(params)" />
-    <button @click="search(params)" class="search_btn">search</button>
+    <input type="text" v-model="searchValue" @keypress.enter="search(searchValue)" />
+    <button @click="search(searchValue)" class="search_btn">search</button>
   </div>
 </template>
 
@@ -15,11 +15,6 @@ export default {
     return {
       searchValue: "",
     };
-  },
-  computed: {
-    params() {
-      return `name=${this.searchValue}`;
-    },
   },
   methods: {
     ...mapActions({

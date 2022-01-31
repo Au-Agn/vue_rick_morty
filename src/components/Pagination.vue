@@ -18,7 +18,11 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { PAGE_INFO, FILTER_CHARACTER, GET_PAGE_NUMBER } from "../store/types";
+import {
+  PAGE_INFO,
+  FILTER_CHARACTER,
+  GET_URL_PARAMS_FOR_FILTER,
+} from "../store/types";
 
 export default {
   name: "Pagination",
@@ -33,12 +37,14 @@ export default {
   methods: {
     ...mapActions({
       filterCharacter: `${FILTER_CHARACTER}`,
-      getPageNumber: `${GET_PAGE_NUMBER}`,
+      getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
     }),
     changePage(url) {
       const newUrl = new URL(url);
       this.pageNumber = url !== null && newUrl.searchParams.get("page");
-      this.getPageNumber(this.pageNumber);
+      this.getUrlParamsForFilter({
+        page: this.pageNumber,
+      });
       this.filterCharacter();
     },
   },

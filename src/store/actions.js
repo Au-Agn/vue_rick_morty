@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   GET_CHARACTERS,
   GET_CHARACTER_BY_ID,
@@ -8,7 +9,6 @@ import {
   GET_EPISODE_INFO,
   GET_FAVOURITES_FROM_LS,
   GET_PAGE_INFO,
-  GET_PAGE_NUMBER,
   SET_CHARACTERS,
   SET_PAGE_INFO,
   SET_CHARACTER,
@@ -18,44 +18,39 @@ import {
   DELETE_FROM_FAVOURITES,
   UPDATE_FAVOURITES__FROM_LS,
   SET_EPISODE_INFO,
-  SET_PAGE_NUMBER,
 } from "./types";
 
 export default {
   [GET_CHARACTERS]({ commit, dispatch }) {
-    return fetch("https://rickandmortyapi.com/api/character")
-      .then((res) => res.json())
-      .then((data) => {
-        commit(SET_CHARACTERS, data.results),
-          dispatch(GET_PAGE_INFO, data.info);
+    return axios
+      .get("https://rickandmortyapi.com/api/character")
+      .then((res) => {
+        commit(SET_CHARACTERS, res.data.results),
+          dispatch(GET_PAGE_INFO, res.data.info);
       })
       .catch((err) => console.log(err.message));
   },
   [GET_CHARACTER_BY_ID]({ commit, dispatch }, id) {
-    return fetch(`https://rickandmortyapi.com/api/character/${id}`)
-      .then((res) => res.json())
+    return axios
+      .get(`https://rickandmortyapi.com/api/character/${id}`)
       .then((res) => {
-        commit(SET_CHARACTER, res);
-        dispatch(GET_EPISODE_INFO, res.episode[0]);
+        commit(SET_CHARACTER, res.data);
+        dispatch(GET_EPISODE_INFO, res.data.episode[0]);
       })
       .catch((err) => console.log(err.message));
   },
   [FILTER_CHARACTER]({ commit, dispatch, state }) {
-    const filteredValue = Object.values(state.urlParams).filter(
-      (value) => value != null
-    );
-    const page = state.pageNumber;
-    const params = `&${filteredValue.join("&")}`;
-    return fetch(
-      `https://rickandmortyapi.com/api/character/?page=${page}${params}`
-    )
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+    return axios
+      .get("https://rickandmortyapi.com/api/character/", {
+        params: state.urlParams,
+      })
       .then((res) => {
-        commit(SET_FILTERED_CHARACTERS, res.results),
-          dispatch(GET_PAGE_INFO, res.info);
+        commit(SET_FILTERED_CHARACTERS, res.data.results),
+          dispatch(GET_PAGE_INFO, res.data.info);
       })
       .catch(
-        (err) => err === 404 && commit(SET_FILTERED_CHARACTERS, []),
+        (err) =>
+          err.response.status === 404 && commit(SET_FILTERED_CHARACTERS, []),
         commit(SET_CHARACTERS, { results: [] })
       );
   },
@@ -69,9 +64,9 @@ export default {
     commit(DELETE_FROM_FAVOURITES, id);
   },
   [GET_EPISODE_INFO]({ commit }, url) {
-    return fetch(url)
-      .then((res) => res.json())
-      .then((data) => commit(SET_EPISODE_INFO, data))
+    return axios
+      .get(url)
+      .then((res) => commit(SET_EPISODE_INFO, res.data))
       .catch((err) => console.log(err.message));
   },
   [GET_FAVOURITES_FROM_LS]({ commit }) {
@@ -80,8 +75,5 @@ export default {
   },
   [GET_PAGE_INFO]({ commit }, data) {
     commit(SET_PAGE_INFO, data);
-  },
-  [GET_PAGE_NUMBER]({ commit }, data) {
-    commit(SET_PAGE_NUMBER, data);
   },
 };

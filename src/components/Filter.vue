@@ -31,8 +31,8 @@ export default {
     }),
     filter(item) {
       this.activeBtn = item;
-      const params = item !== "All" ? `species=${item}` : null;
-      this.getUrlParamsForFilter({ species: params });
+      const species = item !== "All" ? item : null;
+      this.getUrlParamsForFilter({ species });
       this.filterCharacter();
     },
   },

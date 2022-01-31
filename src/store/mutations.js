@@ -8,7 +8,6 @@ import {
   DELETE_FROM_FAVOURITES,
   UPDATE_FAVOURITES__FROM_LS,
   SET_EPISODE_INFO,
-  SET_PAGE_NUMBER,
 } from "./types";
 
 export default {
@@ -54,8 +53,5 @@ export default {
   },
   [SET_EPISODE_INFO]: (state, data) => {
     state.episode = data;
-  },
-  [SET_PAGE_NUMBER]: (state, data) => {
-    state.pageNumber = data;
   },
 };
