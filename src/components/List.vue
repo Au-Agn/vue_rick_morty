@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import ListItem from "./List-item.vue";
 
 export default {

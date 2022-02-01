@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { mapActions } from "vuex";
 import { GET_URL_PARAMS_FOR_FILTER, FILTER_CHARACTER } from "../store/types";
 
@@ -21,7 +21,7 @@ export default {
       getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
       filterCharacter: `${FILTER_CHARACTER}`,
     }),
-    search(value) {
+    search(value: string | null) {
       this.getUrlParamsForFilter({
         name: this.searchValue.length ? value : null,
       });
@@ -29,7 +29,7 @@ export default {
     },
   },
   watch: {
-    searchValue(value) {
+    searchValue(value: string) {
       if (!value.length) {
         this.search(null);
       }

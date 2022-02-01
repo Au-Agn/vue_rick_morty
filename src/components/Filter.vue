@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { mapActions } from "vuex";
 import { FILTER_CHARACTER, GET_URL_PARAMS_FOR_FILTER } from "../store/types";
 
@@ -29,7 +29,7 @@ export default {
       filterCharacter: `${FILTER_CHARACTER}`,
       getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
     }),
-    filter(item) {
+    filter(item: string) {
       this.activeBtn = item;
       const species = item !== "All" ? item : null;
       this.getUrlParamsForFilter({ species });

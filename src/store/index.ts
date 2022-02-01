@@ -3,16 +3,17 @@ import actions from "./actions";
 import mutations from "./mutations";
 import getters from "./getters";
 
+
 export default createStore({
   state: {
     characters: [],
-    characterItem: null,
+    characterItem: {},
     filteredCharacters: [],
     favourites: [],
     urlParams: {},
     isExistsInFavourites: false,
-    pageInfo: null,
-    episode: null,
+    pageInfo: {},
+    episode: {},
   },
   mutations,
   actions,

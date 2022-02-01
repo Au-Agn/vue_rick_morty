@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { mapGetters } from "vuex";
 import { FAVOURITES } from "../store/types";
 import FavouriteIcon from "../assets/icons/FavouriteIcon";

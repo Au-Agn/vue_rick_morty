@@ -19,9 +19,16 @@ import {
   UPDATE_FAVOURITES__FROM_LS,
   SET_EPISODE_INFO,
 } from "./types";
+import { StoreType, URLParamsType, CharacterType, PageInfoType } from "./type";
 
 export default {
-  [GET_CHARACTERS]({ commit, dispatch }) {
+  [GET_CHARACTERS]({
+    commit,
+    dispatch,
+  }: {
+    commit: Function;
+    dispatch: Function;
+  }) {
     return axios
       .get("https://rickandmortyapi.com/api/character")
       .then((res) => {
@@ -30,7 +37,10 @@ export default {
       })
       .catch((err) => console.log(err.message));
   },
-  [GET_CHARACTER_BY_ID]({ commit, dispatch }, id) {
+  [GET_CHARACTER_BY_ID](
+    { commit, dispatch }: { commit: Function; dispatch: Function },
+    id: number
+  ) {
     return axios
       .get(`https://rickandmortyapi.com/api/character/${id}`)
       .then((res) => {
@@ -39,7 +49,15 @@ export default {
       })
       .catch((err) => console.log(err.message));
   },
-  [FILTER_CHARACTER]({ commit, dispatch, state }) {
+  [FILTER_CHARACTER]({
+    commit,
+    dispatch,
+    state,
+  }: {
+    commit: Function;
+    dispatch: Function;
+    state: StoreType;
+  }) {
     return axios
       .get("https://rickandmortyapi.com/api/character/", {
         params: state.urlParams,
@@ -54,26 +72,26 @@ export default {
         commit(SET_CHARACTERS, { results: [] })
       );
   },
-  [GET_URL_PARAMS_FOR_FILTER]({ commit }, params) {
+  [GET_URL_PARAMS_FOR_FILTER]({ commit }: { commit: Function }, params: URLParamsType) {
     commit(SET_URL_PARAMS, params);
   },
-  [ADD_TO_FAVOURITES]({ commit }, character) {
+  [ADD_TO_FAVOURITES]({ commit }: { commit: Function }, character: CharacterType) {
     commit(SET_TO_FAVOURITES, character);
   },
-  [REMOVE_FROM_FAVOURITES]({ commit }, id) {
+  [REMOVE_FROM_FAVOURITES]({ commit }: { commit: Function }, id: number) {
     commit(DELETE_FROM_FAVOURITES, id);
   },
-  [GET_EPISODE_INFO]({ commit }, url) {
+  [GET_EPISODE_INFO]({ commit }: { commit: Function }, url: string) {
     return axios
       .get(url)
       .then((res) => commit(SET_EPISODE_INFO, res.data))
       .catch((err) => console.log(err.message));
   },
-  [GET_FAVOURITES_FROM_LS]({ commit }) {
+  [GET_FAVOURITES_FROM_LS]({ commit }: { commit: Function }) {
     const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
     commit(UPDATE_FAVOURITES__FROM_LS, favourites);
   },
-  [GET_PAGE_INFO]({ commit }, data) {
+  [GET_PAGE_INFO]({ commit }: { commit: Function }, data: PageInfoType) {
     commit(SET_PAGE_INFO, data);
   },
 };

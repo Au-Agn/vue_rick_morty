@@ -19,13 +19,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { mapGetters, mapActions } from "vuex";
 import {
   FAVOURITES,
   ADD_TO_FAVOURITES,
   REMOVE_FROM_FAVOURITES,
 } from "../store/types";
+import {CharacterType} from '../store/type';
 
 export default {
   name: "ListItem",
@@ -39,9 +40,9 @@ export default {
   },
   computed: {
     ...mapGetters({ favourites: `${FAVOURITES}` }),
-    isAdded() {
-      const favouritesIds = this.favourites.map((item) => item.id);
-      return favouritesIds.some((item) => item === this.card.id);
+    isAdded(): boolean {
+      const favouritesIds = this.favourites.map((item: CharacterType) => item.id);
+      return favouritesIds.some((item: number) => item === this.card.id);
     },
   },
   methods: {
@@ -49,7 +50,7 @@ export default {
       addToFavourites: `${ADD_TO_FAVOURITES}`,
       removeFromFavourites: `${REMOVE_FROM_FAVOURITES}`,
     }),
-    handleButton(card) {
+    handleButton(card: CharacterType) {
       return this.isAdded
         ? this.removeFromFavourites(card.id)
         : this.addToFavourites(card);

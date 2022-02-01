@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { mapGetters, mapActions } from "vuex";
 import {
   PAGE_INFO,
@@ -39,7 +39,7 @@ export default {
       filterCharacter: `${FILTER_CHARACTER}`,
       getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
     }),
-    changePage(url) {
+    changePage(url: string) {
       const newUrl = new URL(url);
       this.pageNumber = url !== null && newUrl.searchParams.get("page");
       this.getUrlParamsForFilter({

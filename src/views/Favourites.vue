@@ -2,7 +2,7 @@
   <List :characters="favourites" />
 </template>
 
-<script>
+<script lang="ts">
 import { mapGetters, mapActions } from "vuex";
 import { FAVOURITES, GET_FAVOURITES_FROM_LS } from "../store/types";
 import List from "../components/List.vue";
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      getFavouritesFromLs: `${GET_FAVOURITES_FROM_LS}`,
+      getFavouritesFromLs: `${GET_FAVOURITES_FROM_LS}`
     }),
   },
   mounted() {
