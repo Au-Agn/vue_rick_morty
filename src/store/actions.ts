@@ -18,8 +18,8 @@ import {
   DELETE_FROM_FAVOURITES,
   UPDATE_FAVOURITES__FROM_LS,
   SET_EPISODE_INFO,
-} from "./types";
-import { StoreType, URLParamsType, CharacterType, PageInfoType } from "./type";
+} from "./constants";
+import { StoreType, URLParamsType, CharacterType, PageInfoType } from "./types";
 
 export default {
   [GET_CHARACTERS]({
@@ -68,14 +68,21 @@ export default {
       })
       .catch(
         (err) =>
-          err.response.status === 404 && commit(SET_FILTERED_CHARACTERS, []),
-        commit(SET_CHARACTERS, { results: [] })
+          err.response.status === 404 &&
+          (commit(SET_FILTERED_CHARACTERS, []),
+          commit(SET_CHARACTERS, { results: [] }))
       );
   },
-  [GET_URL_PARAMS_FOR_FILTER]({ commit }: { commit: Function }, params: URLParamsType) {
+  [GET_URL_PARAMS_FOR_FILTER](
+    { commit }: { commit: Function },
+    params: URLParamsType
+  ) {
     commit(SET_URL_PARAMS, params);
   },
-  [ADD_TO_FAVOURITES]({ commit }: { commit: Function }, character: CharacterType) {
+  [ADD_TO_FAVOURITES](
+    { commit }: { commit: Function },
+    character: CharacterType
+  ) {
     commit(SET_TO_FAVOURITES, character);
   },
   [REMOVE_FROM_FAVOURITES]({ commit }: { commit: Function }, id: number) {
@@ -88,7 +95,9 @@ export default {
       .catch((err) => console.log(err.message));
   },
   [GET_FAVOURITES_FROM_LS]({ commit }: { commit: Function }) {
-    const favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+    const favouritesJson = localStorage.getItem("favourites");
+    const favourites =
+      favouritesJson !== null ? JSON.parse(favouritesJson) : [];
     commit(UPDATE_FAVOURITES__FROM_LS, favourites);
   },
   [GET_PAGE_INFO]({ commit }: { commit: Function }, data: PageInfoType) {

@@ -8,19 +8,20 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import { mapActions, mapGetters } from "vuex";
+import Pagination from "../components/Pagination.vue";
+import Searcher from "../components/Searcher.vue";
+import Filter from "../components/Filter.vue";
+import List from "../components/List.vue";
 import {
   CHARACTERS,
   FILTERED_CHARACTERS,
   GET_CHARACTERS,
   GET_FAVOURITES_FROM_LS,
-} from "../store/types";
-import Pagination from "../components/Pagination.vue";
-import Searcher from "../components/Searcher.vue";
-import Filter from "../components/Filter.vue";
-import List from "../components/List.vue";
+} from "../store/constants";
 
-export default {
+export default defineComponent({
   name: "Characters",
   components: { Searcher, Filter, List, Pagination },
   computed: {
@@ -48,7 +49,7 @@ export default {
     this.getCharacters();
     this.getFavouritesFromLs();
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

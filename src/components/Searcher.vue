@@ -1,15 +1,23 @@
 <template>
   <div class="search-field">
-    <input type="text" v-model="searchValue" @keypress.enter="search(searchValue)" />
+    <input
+      type="text"
+      v-model="searchValue"
+      @keypress.enter="search(searchValue)"
+    />
     <button @click="search(searchValue)" class="search_btn">search</button>
   </div>
 </template>
 
 <script lang="ts">
 import { mapActions } from "vuex";
-import { GET_URL_PARAMS_FOR_FILTER, FILTER_CHARACTER } from "../store/types";
+import { defineComponent } from "vue";
+import {
+  GET_URL_PARAMS_FOR_FILTER,
+  FILTER_CHARACTER,
+} from "../store/constants";
 
-export default {
+export default defineComponent({
   name: "Searcher",
   data() {
     return {
@@ -35,7 +43,7 @@ export default {
       }
     },
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

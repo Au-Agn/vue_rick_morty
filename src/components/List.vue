@@ -12,9 +12,10 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 import ListItem from "./List-item.vue";
 
-export default {
+export default defineComponent({
   name: "List",
   components: { ListItem },
   props: {
@@ -23,7 +24,7 @@ export default {
       default: null,
     },
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

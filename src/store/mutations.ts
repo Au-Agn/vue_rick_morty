@@ -8,14 +8,14 @@ import {
   DELETE_FROM_FAVOURITES,
   UPDATE_FAVOURITES__FROM_LS,
   SET_EPISODE_INFO,
-} from "./types";
+} from "./constants";
 import {
   StoreType,
   CharacterType,
   PageInfoType,
   URLParamsType,
   EpisodeType,
-} from "./type";
+} from "./types";
 
 export default {
   [SET_CHARACTERS]: (state: StoreType, data: CharacterType[]) => {

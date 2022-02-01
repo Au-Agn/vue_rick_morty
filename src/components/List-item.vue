@@ -20,15 +20,16 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
 import {
   FAVOURITES,
   ADD_TO_FAVOURITES,
   REMOVE_FROM_FAVOURITES,
-} from "../store/types";
-import {CharacterType} from '../store/type';
+} from "../store/constants";
+import { CharacterType } from "../store/types";
 
-export default {
+export default defineComponent({
   name: "ListItem",
   props: {
     card: {
@@ -41,7 +42,9 @@ export default {
   computed: {
     ...mapGetters({ favourites: `${FAVOURITES}` }),
     isAdded(): boolean {
-      const favouritesIds = this.favourites.map((item: CharacterType) => item.id);
+      const favouritesIds = this.favourites.map(
+        (item: CharacterType) => item.id
+      );
       return favouritesIds.some((item: number) => item === this.card.id);
     },
   },
@@ -56,7 +59,7 @@ export default {
         : this.addToFavourites(card);
     },
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

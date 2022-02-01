@@ -7,13 +7,13 @@ import getters from "./getters";
 export default createStore({
   state: {
     characters: [],
-    characterItem: {},
+    characterItem: null,
     filteredCharacters: [],
     favourites: [],
-    urlParams: {},
+    urlParams: null,
     isExistsInFavourites: false,
-    pageInfo: {},
-    episode: {},
+    pageInfo: null,
+    episode: null,
   },
   mutations,
   actions,

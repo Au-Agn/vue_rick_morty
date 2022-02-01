@@ -14,9 +14,13 @@
 
 <script lang="ts">
 import { mapActions } from "vuex";
-import { FILTER_CHARACTER, GET_URL_PARAMS_FOR_FILTER } from "../store/types";
+import { defineComponent } from "vue";
+import {
+  FILTER_CHARACTER,
+  GET_URL_PARAMS_FOR_FILTER,
+} from "../store/constants";
 
-export default {
+export default defineComponent({
   name: "Filter",
   data() {
     return {
@@ -36,7 +40,7 @@ export default {
       this.filterCharacter();
     },
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

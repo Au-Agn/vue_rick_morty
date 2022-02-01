@@ -17,19 +17,20 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
 import {
   PAGE_INFO,
   FILTER_CHARACTER,
   GET_URL_PARAMS_FOR_FILTER,
-} from "../store/types";
+} from "../store/constants";
 
-export default {
+export default defineComponent({
   name: "Pagination",
   data() {
     return {
-      pageNumber: 1,
-    };
+      pageNumber: "1",
+    } as { pageNumber: string | null | false };
   },
   computed: {
     ...mapGetters({ pageInfo: `${PAGE_INFO}` }),
@@ -48,7 +49,7 @@ export default {
       this.filterCharacter();
     },
   },
-};
+});
 </script>
 
 <style scoped lang="scss">
