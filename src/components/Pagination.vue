@@ -23,29 +23,29 @@ import {
   PAGE_INFO,
   FILTER_CHARACTER,
   GET_URL_PARAMS_FOR_FILTER,
+  PAGE_NUMBER,
+  GET_PAGE_NUMBER,
 } from "../store/constants";
 
 export default defineComponent({
   name: "Pagination",
-  data() {
-    return {
-      pageNumber: "1",
-    } as { pageNumber: string | null | false };
-  },
   computed: {
-    ...mapGetters({ pageInfo: `${PAGE_INFO}` }),
+    ...mapGetters({
+      pageInfo: `${PAGE_INFO}`,
+      pageNumber: `${PAGE_NUMBER}`,
+    }),
   },
   methods: {
     ...mapActions({
       filterCharacter: `${FILTER_CHARACTER}`,
       getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
+      getPageNumber: `${GET_PAGE_NUMBER}`,
     }),
     changePage(url: string) {
       const newUrl = new URL(url);
-      this.pageNumber = url !== null && newUrl.searchParams.get("page");
-      this.getUrlParamsForFilter({
-        page: this.pageNumber,
-      });
+      const page = url !== null && newUrl.searchParams.get("page");
+      this.getPageNumber(page);
+      this.getUrlParamsForFilter({ page });
       this.filterCharacter();
     },
   },

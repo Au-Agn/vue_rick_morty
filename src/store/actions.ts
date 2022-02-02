@@ -19,7 +19,9 @@ import {
   UPDATE_FAVOURITES__FROM_LS,
   SET_EPISODE_INFO,
   SET_ACTIVE_BUTTON,
-  GET_ACTIVE_BUTTON
+  GET_ACTIVE_BUTTON,
+  GET_PAGE_NUMBER,
+  SET_PAGE_NUMBER
 } from "./constants";
 import { StoreType, URLParamsType, CharacterType, PageInfoType } from "./types";
 
@@ -107,5 +109,8 @@ export default {
   },
   [GET_ACTIVE_BUTTON]({ commit }: { commit: Function }, data: string) {
     commit(SET_ACTIVE_BUTTON, data);
+  },
+  [GET_PAGE_NUMBER]({ commit }: { commit: Function }, data: number) {
+    commit(SET_PAGE_NUMBER, data);
   },
 };

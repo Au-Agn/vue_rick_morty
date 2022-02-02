@@ -9,6 +9,7 @@ import {
   UPDATE_FAVOURITES__FROM_LS,
   SET_EPISODE_INFO,
   SET_ACTIVE_BUTTON,
+  SET_PAGE_NUMBER
 } from "./constants";
 import {
   StoreType,
@@ -66,5 +67,8 @@ export default {
   },
   [SET_ACTIVE_BUTTON]: (state: StoreType, data: string) => {
     state.activeBtn = data;
+  },
+  [SET_PAGE_NUMBER]: (state: StoreType, data: number) => {
+    state.pageNumber = data;
   },
 };

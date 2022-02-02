@@ -48,4 +48,5 @@ export type StoreType = {
   pageInfo: PageInfoType | null;
   episode: EpisodeType | null;
   activeBtn: string;
+  pageNumber: number;
 };
