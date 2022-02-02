@@ -8,6 +8,7 @@ const REMOVE_FROM_FAVOURITES = "removeFromFavourites";
 const GET_EPISODE_INFO = "getEpisodeInfo";
 const GET_FAVOURITES_FROM_LS = "getFavouritesFromLs";
 const GET_PAGE_INFO = "getPageInfo";
+const GET_ACTIVE_BUTTON = "getActiveBtn";
 // getters
 const CHARACTERS = "characters";
 const CHARACTER_ITEM = "characterItem";
@@ -15,6 +16,7 @@ const FILTERED_CHARACTERS = "filteredCharacters";
 const FAVOURITES = "favourites";
 const PAGE_INFO = "pageInfo";
 const EPISODE = "episode";
+const ACTIVE_BUTTON = "activeBtn";
 // mutations
 const SET_CHARACTERS = "setCharacters";
 const SET_PAGE_INFO = "setPageInfo";
@@ -25,6 +27,7 @@ const SET_TO_FAVOURITES = "setToFavourites";
 const DELETE_FROM_FAVOURITES = "deleteFromFavourites";
 const UPDATE_FAVOURITES__FROM_LS = "updateFavouritesFromLs";
 const SET_EPISODE_INFO = "setEpisodeInfo";
+const SET_ACTIVE_BUTTON = "SetActiveBtn";
 
 export {
   // actions
@@ -37,6 +40,7 @@ export {
   GET_EPISODE_INFO,
   GET_FAVOURITES_FROM_LS,
   GET_PAGE_INFO,
+  GET_ACTIVE_BUTTON,
   // getters
   CHARACTERS,
   CHARACTER_ITEM,
@@ -44,6 +48,7 @@ export {
   FAVOURITES,
   PAGE_INFO,
   EPISODE,
+  ACTIVE_BUTTON,
   // mutations
   SET_CHARACTERS,
   SET_PAGE_INFO,
@@ -54,4 +59,5 @@ export {
   DELETE_FROM_FAVOURITES,
   UPDATE_FAVOURITES__FROM_LS,
   SET_EPISODE_INFO,
+  SET_ACTIVE_BUTTON
 };

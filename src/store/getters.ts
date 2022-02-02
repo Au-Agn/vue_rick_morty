@@ -5,6 +5,7 @@ import {
   FAVOURITES,
   PAGE_INFO,
   EPISODE,
+  ACTIVE_BUTTON
 } from "./constants";
 import {StoreType} from './types';
 
@@ -15,4 +16,5 @@ export default {
   [FAVOURITES]: (state: StoreType) => state.favourites,
   [PAGE_INFO]: (state: StoreType) => state.pageInfo,
   [EPISODE]: (state: StoreType) => state.episode,
+  [ACTIVE_BUTTON]: (state: StoreType) => state.activeBtn,
 };

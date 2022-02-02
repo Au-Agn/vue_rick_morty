@@ -8,6 +8,7 @@ import {
   DELETE_FROM_FAVOURITES,
   UPDATE_FAVOURITES__FROM_LS,
   SET_EPISODE_INFO,
+  SET_ACTIVE_BUTTON,
 } from "./constants";
 import {
   StoreType,
@@ -62,5 +63,8 @@ export default {
   },
   [SET_EPISODE_INFO]: (state: StoreType, data: EpisodeType) => {
     state.episode = data;
+  },
+  [SET_ACTIVE_BUTTON]: (state: StoreType, data: string) => {
+    state.activeBtn = data;
   },
 };

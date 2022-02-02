@@ -14,6 +14,7 @@ export default createStore({
     isExistsInFavourites: false,
     pageInfo: null,
     episode: null,
+    activeBtn: 'All'
   },
   mutations,
   actions,

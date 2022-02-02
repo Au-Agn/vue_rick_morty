@@ -13,11 +13,13 @@
 </template>
 
 <script lang="ts">
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import { defineComponent } from "vue";
 import {
   FILTER_CHARACTER,
   GET_URL_PARAMS_FOR_FILTER,
+  GET_ACTIVE_BUTTON,
+  ACTIVE_BUTTON,
 } from "../store/constants";
 
 export default defineComponent({
@@ -25,18 +27,23 @@ export default defineComponent({
   data() {
     return {
       options: ["All", "Human", "Animal", "Alien"],
-      activeBtn: "All",
     };
+  },
+  computed: {
+    ...mapGetters({
+      activeBtn: `${ACTIVE_BUTTON}`,
+    }),
   },
   methods: {
     ...mapActions({
       filterCharacter: `${FILTER_CHARACTER}`,
       getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
+      getActiveButton: `${GET_ACTIVE_BUTTON}`,
     }),
     filter(item: string) {
-      this.activeBtn = item;
       const species = item !== "All" ? item : null;
       this.getUrlParamsForFilter({ species });
+      this.getActiveButton(item);
       this.filterCharacter();
     },
   },

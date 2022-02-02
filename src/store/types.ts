@@ -47,4 +47,5 @@ export type StoreType = {
   isExistsInFavourites: boolean;
   pageInfo: PageInfoType | null;
   episode: EpisodeType | null;
+  activeBtn: string;
 };
