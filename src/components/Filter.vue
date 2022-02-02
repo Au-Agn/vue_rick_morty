@@ -16,7 +16,7 @@
 import { mapActions, mapGetters } from "vuex";
 import { defineComponent } from "vue";
 import {
-  FILTER_CHARACTER,
+  GET_CHARACTERS,
   GET_URL_PARAMS_FOR_FILTER,
   GET_ACTIVE_BUTTON,
   ACTIVE_BUTTON,
@@ -36,7 +36,7 @@ export default defineComponent({
   },
   methods: {
     ...mapActions({
-      filterCharacter: `${FILTER_CHARACTER}`,
+      getCharacters: `${GET_CHARACTERS}`,
       getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
       getActiveButton: `${GET_ACTIVE_BUTTON}`,
     }),
@@ -44,7 +44,7 @@ export default defineComponent({
       const species = item !== "All" ? item : null;
       this.getUrlParamsForFilter({ species });
       this.getActiveButton(item);
-      this.filterCharacter();
+      this.getCharacters();
     },
   },
 });

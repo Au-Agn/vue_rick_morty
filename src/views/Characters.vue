@@ -16,7 +16,6 @@ import Filter from "../components/Filter.vue";
 import List from "../components/List.vue";
 import {
   CHARACTERS,
-  FILTERED_CHARACTERS,
   GET_CHARACTERS,
   GET_FAVOURITES_FROM_LS,
 } from "../store/constants";
@@ -27,12 +26,9 @@ export default defineComponent({
   computed: {
     ...mapGetters({
       characters: `${CHARACTERS}`,
-      filteredCharacters: `${FILTERED_CHARACTERS}`,
     }),
     currentCharacters() {
-      if (this.filteredCharacters.length) {
-        return this.filteredCharacters;
-      } else if (this.characters.length) {
+      if (this.characters.length) {
         return this.characters;
       } else {
         return [];

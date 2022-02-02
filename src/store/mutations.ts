@@ -2,7 +2,6 @@ import {
   SET_CHARACTERS,
   SET_PAGE_INFO,
   SET_CHARACTER,
-  SET_FILTERED_CHARACTERS,
   SET_URL_PARAMS,
   SET_TO_FAVOURITES,
   DELETE_FROM_FAVOURITES,
@@ -28,9 +27,6 @@ export default {
   },
   [SET_CHARACTER]: (state: StoreType, data: CharacterType) => {
     state.characterItem = data;
-  },
-  [SET_FILTERED_CHARACTERS]: (state: StoreType, data: CharacterType[]) => {
-    state.filteredCharacters = data;
   },
   [SET_URL_PARAMS]: (state: StoreType, data: URLParamsType) => {
     state.urlParams = { ...state.urlParams, ...data };

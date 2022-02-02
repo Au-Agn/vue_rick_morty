@@ -21,7 +21,7 @@ import { defineComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
 import {
   PAGE_INFO,
-  FILTER_CHARACTER,
+  GET_CHARACTERS,
   GET_URL_PARAMS_FOR_FILTER,
   PAGE_NUMBER,
   GET_PAGE_NUMBER,
@@ -37,7 +37,7 @@ export default defineComponent({
   },
   methods: {
     ...mapActions({
-      filterCharacter: `${FILTER_CHARACTER}`,
+      getCharacters: `${GET_CHARACTERS}`,
       getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
       getPageNumber: `${GET_PAGE_NUMBER}`,
     }),
@@ -46,7 +46,7 @@ export default defineComponent({
       const page = url !== null && newUrl.searchParams.get("page");
       this.getPageNumber(page);
       this.getUrlParamsForFilter({ page });
-      this.filterCharacter();
+      this.getCharacters();
     },
   },
 });

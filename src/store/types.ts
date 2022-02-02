@@ -41,7 +41,6 @@ export type EpisodeType = {
 export type StoreType = {
   characters: CharacterType[];
   characterItem: CharacterType | null;
-  filteredCharacters: CharacterType[];
   favourites: CharacterType[];
   urlParams: URLParamsType | null;
   isExistsInFavourites: boolean;

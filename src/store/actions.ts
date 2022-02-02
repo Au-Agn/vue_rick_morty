@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   GET_CHARACTERS,
   GET_CHARACTER_BY_ID,
-  FILTER_CHARACTER,
   GET_URL_PARAMS_FOR_FILTER,
   ADD_TO_FAVOURITES,
   REMOVE_FROM_FAVOURITES,
@@ -12,7 +11,6 @@ import {
   SET_CHARACTERS,
   SET_PAGE_INFO,
   SET_CHARACTER,
-  SET_FILTERED_CHARACTERS,
   SET_URL_PARAMS,
   SET_TO_FAVOURITES,
   DELETE_FROM_FAVOURITES,
@@ -21,26 +19,11 @@ import {
   SET_ACTIVE_BUTTON,
   GET_ACTIVE_BUTTON,
   GET_PAGE_NUMBER,
-  SET_PAGE_NUMBER
+  SET_PAGE_NUMBER,
 } from "./constants";
 import { StoreType, URLParamsType, CharacterType, PageInfoType } from "./types";
 
 export default {
-  [GET_CHARACTERS]({
-    commit,
-    dispatch,
-  }: {
-    commit: Function;
-    dispatch: Function;
-  }) {
-    return axios
-      .get("https://rickandmortyapi.com/api/character")
-      .then((res) => {
-        commit(SET_CHARACTERS, res.data.results),
-          dispatch(GET_PAGE_INFO, res.data.info);
-      })
-      .catch((err) => console.log(err.message));
-  },
   [GET_CHARACTER_BY_ID](
     { commit, dispatch }: { commit: Function; dispatch: Function },
     id: number
@@ -53,7 +36,7 @@ export default {
       })
       .catch((err) => console.log(err.message));
   },
-  [FILTER_CHARACTER]({
+  [GET_CHARACTERS]({
     commit,
     dispatch,
     state,
@@ -67,14 +50,12 @@ export default {
         params: state.urlParams,
       })
       .then((res) => {
-        commit(SET_FILTERED_CHARACTERS, res.data.results),
+        commit(SET_CHARACTERS, res.data.results),
           dispatch(GET_PAGE_INFO, res.data.info);
       })
       .catch(
         (err) =>
-          err.response.status === 404 &&
-          (commit(SET_FILTERED_CHARACTERS, []),
-          commit(SET_CHARACTERS, { results: [] }))
+          err.response.status === 404 && commit(SET_CHARACTERS, { results: [] })
       );
   },
   [GET_URL_PARAMS_FOR_FILTER](

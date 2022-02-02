@@ -12,10 +12,7 @@
 <script lang="ts">
 import { mapActions } from "vuex";
 import { defineComponent } from "vue";
-import {
-  GET_URL_PARAMS_FOR_FILTER,
-  FILTER_CHARACTER,
-} from "../store/constants";
+import { GET_URL_PARAMS_FOR_FILTER, GET_CHARACTERS } from "../store/constants";
 
 export default defineComponent({
   name: "Searcher",
@@ -27,13 +24,13 @@ export default defineComponent({
   methods: {
     ...mapActions({
       getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
-      filterCharacter: `${FILTER_CHARACTER}`,
+      getCharacters: `${GET_CHARACTERS}`,
     }),
     search(value: string | null) {
       this.getUrlParamsForFilter({
         name: this.searchValue.length ? value : null,
       });
-      this.filterCharacter();
+      this.getCharacters();
     },
   },
   watch: {

@@ -8,7 +8,6 @@ export default createStore({
   state: {
     characters: [],
     characterItem: null,
-    filteredCharacters: [],
     favourites: [],
     urlParams: null,
     isExistsInFavourites: false,
