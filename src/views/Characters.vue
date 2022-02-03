@@ -3,7 +3,7 @@
     <Filter />
     <Searcher />
   </div>
-  <List :characters="currentCharacters" />
+  <List :characters="characters" />
   <Pagination />
 </template>
 
@@ -27,13 +27,6 @@ export default defineComponent({
     ...mapGetters({
       characters: `${CHARACTERS}`,
     }),
-    currentCharacters() {
-      if (this.characters.length) {
-        return this.characters;
-      } else {
-        return [];
-      }
-    },
   },
   methods: {
     ...mapActions({

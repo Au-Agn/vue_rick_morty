@@ -10,9 +10,13 @@
 </template>
 
 <script lang="ts">
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import { defineComponent } from "vue";
-import { GET_URL_PARAMS_FOR_FILTER, GET_CHARACTERS } from "../store/constants";
+import {
+  GET_URL_PARAMS_FOR_FILTER,
+  GET_CHARACTERS,
+  URL_PARAMS,
+} from "../store/constants";
 
 export default defineComponent({
   name: "Searcher",
@@ -20,6 +24,11 @@ export default defineComponent({
     return {
       searchValue: "",
     };
+  },
+  computed: {
+    ...mapGetters({
+      urlParams: `${URL_PARAMS}`,
+    }),
   },
   methods: {
     ...mapActions({
@@ -39,6 +48,11 @@ export default defineComponent({
         this.search(null);
       }
     },
+  },
+  mounted() {
+    if (this.urlParams !== null) {
+      this.searchValue = this.urlParams.name;
+    }
   },
 });
 </script>
