@@ -16,39 +16,40 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
 import {
   PAGE_INFO,
-  FILTER_CHARACTER,
+  GET_CHARACTERS,
   GET_URL_PARAMS_FOR_FILTER,
-} from "../store/types";
+  PAGE_NUMBER,
+  GET_PAGE_NUMBER,
+} from "../store/constants";
 
-export default {
+export default defineComponent({
   name: "Pagination",
-  data() {
-    return {
-      pageNumber: 1,
-    };
-  },
   computed: {
-    ...mapGetters({ pageInfo: `${PAGE_INFO}` }),
+    ...mapGetters({
+      pageInfo: `${PAGE_INFO}`,
+      pageNumber: `${PAGE_NUMBER}`,
+    }),
   },
   methods: {
     ...mapActions({
-      filterCharacter: `${FILTER_CHARACTER}`,
+      getCharacters: `${GET_CHARACTERS}`,
       getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
+      getPageNumber: `${GET_PAGE_NUMBER}`,
     }),
-    changePage(url) {
+    changePage(url: string) {
       const newUrl = new URL(url);
-      this.pageNumber = url !== null && newUrl.searchParams.get("page");
-      this.getUrlParamsForFilter({
-        page: this.pageNumber,
-      });
-      this.filterCharacter();
+      const page = url !== null && newUrl.searchParams.get("page");
+      this.getPageNumber(page);
+      this.getUrlParamsForFilter({ page });
+      this.getCharacters();
     },
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

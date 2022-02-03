@@ -16,7 +16,8 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { mapActions, mapGetters } from "vuex";
 import {
   CHARACTER_ITEM,
@@ -26,9 +27,10 @@ import {
   ADD_TO_FAVOURITES,
   REMOVE_FROM_FAVOURITES,
   GET_FAVOURITES_FROM_LS,
-} from "../store/types";
+} from "../store/constants";
+import { CharacterType } from "../store/types";
 
-export default {
+export default defineComponent({
   name: "Card",
   computed: {
     ...mapGetters({
@@ -36,9 +38,13 @@ export default {
       episode: `${EPISODE}`,
       favourites: `${FAVOURITES}`,
     }),
-    isAdded() {
-      const favouritesIds = this.favourites.map((item) => item.id);
-      return favouritesIds.some((item) => item === this.characterItem.id);
+    isAdded(): boolean {
+      const favouritesIds = this.favourites.map(
+        (item: CharacterType) => item.id
+      );
+      return favouritesIds.some(
+        (item: number) => item === this.characterItem.id
+      );
     },
   },
   methods: {
@@ -48,7 +54,7 @@ export default {
       addToFavourites: `${ADD_TO_FAVOURITES}`,
       removeFromFavourites: `${REMOVE_FROM_FAVOURITES}`,
     }),
-    handleButton(card) {
+    handleButton(card: CharacterType) {
       return this.isAdded
         ? this.removeFromFavourites(card.id)
         : this.addToFavourites(card);
@@ -59,7 +65,7 @@ export default {
     this.getCharacterById(id);
     this.getFavouritesFromLs();
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

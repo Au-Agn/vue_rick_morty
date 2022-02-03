@@ -1,41 +1,60 @@
 <template>
   <div class="search-field">
-    <input type="text" v-model="searchValue" @keypress.enter="search(searchValue)" />
+    <input
+      type="text"
+      v-model="searchValue"
+      @keypress.enter="search(searchValue)"
+    />
     <button @click="search(searchValue)" class="search_btn">search</button>
   </div>
 </template>
 
-<script>
-import { mapActions } from "vuex";
-import { GET_URL_PARAMS_FOR_FILTER, FILTER_CHARACTER } from "../store/types";
+<script lang="ts">
+import { mapActions, mapGetters } from "vuex";
+import { defineComponent } from "vue";
+import {
+  GET_URL_PARAMS_FOR_FILTER,
+  GET_CHARACTERS,
+  URL_PARAMS,
+} from "../store/constants";
 
-export default {
+export default defineComponent({
   name: "Searcher",
   data() {
     return {
       searchValue: "",
     };
   },
+  computed: {
+    ...mapGetters({
+      urlParams: `${URL_PARAMS}`,
+    }),
+  },
   methods: {
     ...mapActions({
       getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
-      filterCharacter: `${FILTER_CHARACTER}`,
+      getCharacters: `${GET_CHARACTERS}`,
     }),
-    search(value) {
+    search(value: string | null) {
       this.getUrlParamsForFilter({
         name: this.searchValue.length ? value : null,
       });
-      this.filterCharacter();
+      this.getCharacters();
     },
   },
   watch: {
-    searchValue(value) {
+    searchValue(value: string) {
       if (!value.length) {
         this.search(null);
       }
     },
   },
-};
+  mounted() {
+    if (this.urlParams !== null) {
+      this.searchValue = this.urlParams.name;
+    }
+  },
+});
 </script>
 
 <style scoped lang="scss">

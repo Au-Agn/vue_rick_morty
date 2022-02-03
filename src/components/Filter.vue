@@ -12,31 +12,42 @@
   </div>
 </template>
 
-<script>
-import { mapActions } from "vuex";
-import { FILTER_CHARACTER, GET_URL_PARAMS_FOR_FILTER } from "../store/types";
+<script lang="ts">
+import { mapActions, mapGetters } from "vuex";
+import { defineComponent } from "vue";
+import {
+  GET_CHARACTERS,
+  GET_URL_PARAMS_FOR_FILTER,
+  GET_ACTIVE_BUTTON,
+  ACTIVE_BUTTON,
+} from "../store/constants";
 
-export default {
+export default defineComponent({
   name: "Filter",
   data() {
     return {
       options: ["All", "Human", "Animal", "Alien"],
-      activeBtn: "All",
     };
+  },
+  computed: {
+    ...mapGetters({
+      activeBtn: `${ACTIVE_BUTTON}`,
+    }),
   },
   methods: {
     ...mapActions({
-      filterCharacter: `${FILTER_CHARACTER}`,
+      getCharacters: `${GET_CHARACTERS}`,
       getUrlParamsForFilter: `${GET_URL_PARAMS_FOR_FILTER}`,
+      getActiveButton: `${GET_ACTIVE_BUTTON}`,
     }),
-    filter(item) {
-      this.activeBtn = item;
+    filter(item: string) {
       const species = item !== "All" ? item : null;
       this.getUrlParamsForFilter({ species });
-      this.filterCharacter();
+      this.getActiveButton(item);
+      this.getCharacters();
     },
   },
-};
+});
 </script>
 
 <style scoped lang="scss">
