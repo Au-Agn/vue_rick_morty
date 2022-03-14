@@ -1,15 +1,15 @@
 <template>
   <div class="pagitation__wrap" v-if="pageInfo">
-    <div>Page {{ pageNumber }} of {{ pageInfo.pages }}</div>
+    <div class="pageNumber">Page {{ pageNumber }} of {{ pageInfo.pages }}</div>
     <div class="pagitation">
       <button
         @click="changePage(pageInfo.prev)"
-        class="pagitation__item"
+        class="pagitation__item prev"
         :disabled="pageInfo.prev === null"
       >
         Prev
       </button>
-      <button @click="changePage(pageInfo.next)" class="pagitation__item">
+      <button @click="changePage(pageInfo.next)" class="pagitation__item next">
         Next
       </button>
     </div>
